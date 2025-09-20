@@ -1,7 +1,7 @@
 import time
 
 # Change this to the FIRST socat PTY (your GPS "device")
-GPS_PORT = "/dev/ttys004"
+GPS_PORT = "/dev/ttys006"
 
 # Starting point: Five Points MARTA Station, Atlanta
 lat, lon = 33.753746, -84.391502  
