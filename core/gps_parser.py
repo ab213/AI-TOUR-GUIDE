@@ -1,104 +1,89 @@
-from serial import Serial
+# gps_parser.py
+
+from typing import Dict, Generator
+from serial import Serial, SerialException
 from pynmeagps import NMEAReader
-import math
-import numba
 
-@numba.njit(fastmath=True, cache=True)
-def haversine(lat1, lon1, lat2, lon2, miles=False):
+def parse_nmea(port: str = "/dev/ttys031", baud: int = 9600) -> Generator[Dict, None, None]:
     """
-    Ultra-fast haversine distance using Numba JIT.
-    Suitable for real-time GPS parsing.
-    
+    Continuously connects to and parses live NMEA data from a GPS device.
+
+    This generator function opens a serial connection and reads incoming data line by
+    line, parsing valid NMEA sentences into a structured dictionary format. It handles
+    various common sentence types like GGA, RMC, GSA, and GSV.
+
     Args:
-        lat1, lon1, lat2, lon2 : float (decimal degrees)
-        miles : bool, if True → return miles, else kilometers.
-    
-    Returns:
-        float: distance in chosen unit
-    """
-    # Convert degrees → radians
-    DEG_TO_RAD = math.pi / 180.0
-    lat1 *= DEG_TO_RAD
-    lon1 *= DEG_TO_RAD
-    lat2 *= DEG_TO_RAD
-    lon2 *= DEG_TO_RAD
+        port (str): The serial port to connect to (e.g., '/dev/ttyUSB0' on Linux
+                    or 'COM3' on Windows).
+        baud (int): The baud rate for the serial communication.
 
-    # Deltas
-    dlat = lat2 - lat1
-    dlon = lon2 - lon1
-
-    # Haversine formula
-    h = math.sin(dlat * 0.5)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon * 0.5)**2
-    distance = 2.0 * math.asin(math.sqrt(h))
-
-    # Scale by Earth radius
-    return (3958.7613 if miles else 6371.0088) * distance
-
-def parse_nmea(port="/dev/ttys011", baud=9600):
-    """
-    Continuously parses live NMEA data from a virtual or real GPS
-    and yields structured data as dictionaries.
-    
-    Args:
-        port (str): Serial port to connect to.
-        baud (int): Baud rate for the GPS.
-    
     Yields:
-        dict: Parsed NMEA sentence data.
+        Generator[Dict, None, None]: A dictionary representing the parsed data from
+                                     a single NMEA sentence.
     """
-    with Serial(port, baud, timeout=3) as stream:
+    print(f"Attempting to connect to GPS on port {port} at {baud} baud...")
+    try:
+        stream = Serial(port, baud, timeout=3)
+    except SerialException as e:
+        print(f"Error: Could not open serial port '{port}'.")
+        print(f"Details: {e}")
+        print("Please ensure the port is correct and not in use by another program.")
+        return
+
+    with stream:
+        print("Successfully connected to GPS. Reading data...")
         nmr = NMEAReader(stream)
+
         while True:
             try:
-                raw_data, parsed_data = nmr.read()
-                if parsed_data:
-                    sentence = {"raw": raw_data.strip(), "type": parsed_data.msgID}
+                (raw_data, parsed_data) = nmr.read()
+                if not parsed_data:
+                    continue
 
-                    if parsed_data.msgID == "GGA":
-                        sentence.update({
-                            "time": parsed_data.time,
-                            "lat": parsed_data.lat,
-                            "lon": parsed_data.lon,
-                            "alt": parsed_data.alt,
-                            "sats": parsed_data.numSV
-                        })
-                    
-                    elif parsed_data.msgID == "RMC":
-                        sentence.update({
-                            "time": parsed_data.time,
-                            "status": parsed_data.status,
-                            "lat": parsed_data.lat,
-                            "lon": parsed_data.lon,
-                            "speed_knots": parsed_data.spd,
-                            "date": parsed_data.date
-                        })
+                sentence = {"raw": raw_data.strip().decode('utf-8'), "type": parsed_data.msgID}
 
-                    elif parsed_data.msgID == "GSA":
-                        sentence.update({
-                            "mode": parsed_data.mode,
-                            "fix": parsed_data.navMode,
-                            "pdop": parsed_data.pdop,
-                            "hdop": parsed_data.hdop,
-                            "vdop": parsed_data.vdop
-                        })
+                # Add specific fields based on message type
+                if parsed_data.msgID == "GGA":
+                    sentence.update({
+                        "time": parsed_data.time,
+                        "lat": parsed_data.lat,
+                        "lon": parsed_data.lon,
+                        "alt": parsed_data.alt,
+                        "quality": parsed_data.quality,
+                        "sats": parsed_data.numSV,
+                    })
+                elif parsed_data.msgID == "RMC":
+                    sentence.update({
+                        "time": parsed_data.time,
+                        "status": parsed_data.status,
+                        "lat": parsed_data.lat,
+                        "lon": parsed_data.lon,
+                        "speed_knots": parsed_data.spd,
+                        "date": parsed_data.date,
+                    })
+                
+                # Only yield sentences that contain location data for our use case
+                if "lat" in sentence and "lon" in sentence:
+                    yield sentence
 
-                    elif parsed_data.msgID == "GSV":
-                        sentence.update({
-                            "num_msgs": parsed_data.numMsg,
-                            "sats_in_view": parsed_data.numSV
-                        })
-
-                    yield sentence  
-
-            except KeyboardInterrupt:
-                print("\nStopping GPS parser.")
-                break
-            except Exception as e:
-                yield {"error": str(e)}
+            except (IOError, ValueError, TypeError) as e:
+                print(f"An error occurred during parsing: {e}")
                 continue
 
 
-
 if __name__ == "__main__":
-    for d in parse_nmea():
-        print(d)
+    print("--- Testing gps_parser.py module independently ---")
+    print("This will print the first 5 parsed sentences with location data.")
+    print("To stop, press Ctrl+C.")
+    
+    try:
+        count = 0
+        for sentence_data in parse_nmea():
+            if sentence_data and sentence_data.get("lat"):
+                print(sentence_data)
+                count += 1
+                if count >= 5:
+                    break
+    except KeyboardInterrupt:
+        print("\nTest stopped by user.")
+    print("\n--- GPS parser test complete ---")
