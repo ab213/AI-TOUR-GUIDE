@@ -1,62 +1,130 @@
 {
-    "[-84.39414, 33.76318]": {
+    "[-84.3946, 33.7634]": {
         "name": "Georgia Aquarium",
         "city": "Atlanta"
     },
-    "[-84.3934, 33.7600]": {
-        "name": "Centennial Olympic Park",
-        "city": "Atlanta"
-    },
-    "[-84.3921, 33.7628]": {
+    "[-84.3928, 33.7625]": {
         "name": "World of Coca-Cola",
         "city": "Atlanta"
     },
-    "[-84.3857, 33.7915]": {
-        "name": "High Museum of Art",
+    "[-84.3934, 33.7608]": {
+        "name": "Centennial Olympic Park",
         "city": "Atlanta"
     },
-    "[-84.3721, 33.7844]": {
-        "name": "Piedmont Park",
-        "city": "Atlanta"
-    },
-    "[-84.4055, 33.7788]": {
-        "name": "Varsity Restaurant",
-        "city": "Atlanta"
-    },
-    "[-84.3968, 33.7558]": {
+    "[-84.4005, 33.7554]": {
         "name": "Mercedes-Benz Stadium",
         "city": "Atlanta"
     },
-    "[-84.3643, 33.7533]": {
-        "name": "Krog Street Market",
-        "city": "Atlanta"
-    },
-    "[-84.3879, 33.7487]": {
+    "[-84.3963, 33.7573]": {
         "name": "State Farm Arena",
         "city": "Atlanta"
     },
-    "[-84.3847, 33.7645]": {
+    "[-84.3739, 33.7550]": {
+        "name": "Martin Luther King, Jr. National Historical Park",
+        "city": "Atlanta"
+    },
+    "[-84.3742, 33.7850]": {
+        "name": "Piedmont Park",
+        "city": "Atlanta"
+    },
+    "[-84.3748, 33.7896]": {
+        "name": "Atlanta Botanical Garden",
+        "city": "Atlanta"
+    },
+    "[-84.3853, 33.7900]": {
+        "name": "High Museum of Art",
+        "city": "Atlanta"
+    },
+    "[-84.3861, 33.7725]": {
+        "name": "Fox Theatre",
+        "city": "Atlanta"
+    },
+    "[-84.3661, 33.7725]": {
         "name": "Ponce City Market",
         "city": "Atlanta"
     },
-    "[-84.4377, 33.8077]": {
-        "name": "Cumberland Mall",
-        "city": "Smyrna"
-    },
-    "[-84.3955, 33.7547]": {
-        "name": "College Football Hall of Fame",
+    "[-84.3627, 33.7573]": {
+        "name": "Krog Street Market",
         "city": "Atlanta"
     },
-    "[-84.3995, 33.7766]": {
-        "name": "Midtown Atlanta",
+    "[-84.3725, 33.7328]": {
+        "name": "Zoo Atlanta",
         "city": "Atlanta"
     },
-    "[-84.3541, 33.7618]": {
+    "[-84.4281, 33.6407]": {
+        "name": "Hartsfield-Jackson Atlanta International Airport (ATL)",
+        "city": "Atlanta"
+    },
+    "[-84.3619, 33.8465]": {
+        "name": "Lenox Square",
+        "city": "Atlanta"
+    },
+    "[-84.3948, 33.7749]": {
+        "name": "Georgia Institute of Technology",
+        "city": "Atlanta"
+    },
+    "[-84.3868, 33.7530]": {
+        "name": "Georgia State University",
+        "city": "Atlanta"
+    },
+    "[-84.3900, 33.7719]": {
+        "name": "The Varsity",
+        "city": "Atlanta"
+    },
+    "[-84.3758, 33.7709]": {
+        "name": "Mary Mac's Tea Room",
+        "city": "Atlanta"
+    },
+    "[-84.3486, 33.7656]": {
         "name": "Little Five Points",
         "city": "Atlanta"
     },
-    "[-84.4571, 33.7797]": {
-        "name": "Atlanta Botanical Garden",
+    "[-84.3957, 33.7933]": {
+        "name": "Atlantic Station",
+        "city": "Atlanta"
+    },
+    "[-84.3746, 33.7487]": {
+        "name": "Oakland Cemetery",
+        "city": "Atlanta"
+    },
+    "[-84.3541, 33.7668]": {
+        "name": "Jimmy Carter Presidential Library and Museum",
+        "city": "Atlanta"
+    },
+    "[-84.3939, 33.7644]": {
+        "name": "National Center for Civil and Human Rights",
+        "city": "Atlanta"
+    },
+    "[-84.3949, 33.7593]": {
+        "name": "College Football Hall of Fame",
+        "city": "Atlanta"
+    },
+    "[-84.3863, 33.7812]": {
+        "name": "Midtown MARTA Station",
+        "city": "Atlanta"
+    },
+    "[-84.3898, 33.7540]": {
+        "name": "Five Points MARTA Station",
+        "city": "Atlanta"
+    },
+    "[-84.4677, 33.8907]": {
+        "name": "Truist Park",
+        "city": "Atlanta"
+    },
+    "[-84.3921, 33.7588]": {
+        "name": "The Tabernacle",
+        "city": "Atlanta"
+    },
+    "[-84.3421, 33.7423]": {
+        "name": "East Atlanta Village",
+        "city": "Atlanta"
+    },
+    "[-84.3910, 33.8080]": {
+        "name": "SweetWater Brewing Company",
+        "city": "Atlanta"
+    },
+    "[-84.3239, 33.7925]": {
+        "name": "Emory University",
         "city": "Atlanta"
     }
 }
