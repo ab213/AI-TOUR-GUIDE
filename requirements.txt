@@ -2,5 +2,4 @@ pyserial
 pynmea2
 pynmeagps==1.0.51
 numba
-torch
-torchvision
+pyttsx3
