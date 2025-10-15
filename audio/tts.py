@@ -9,52 +9,41 @@ import tempfile
 import os
 import subprocess
 import platform
+import wave
 from typing import Optional, Dict, Any
+from piper import PiperVoice
 
 
-def init_tts(config: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+def init_tts() -> Dict[str, Any]:
     """Initialize TTS engine.
-    
-    Args:
-        config: Optional configuration dictionary
-            - rate: Speech rate (default: 200 for macOS, 150 for Pi)
-            - volume: Volume level 0.0-1.0 (default: 0.9)
-            - voice: Voice ID (optional)
-    
+
     Returns:
-        TTS state dictionary containing engine and platform info
+        TTS state dictionary containing voice and platform info
     """
-    cfg = config or {}
     is_macos = platform.system() == "Darwin"
     is_pi = platform.system() == "Linux" and "arm" in platform.machine().lower()
     
     print(f"[TTS] Platform: {platform.system()} (macOS={is_macos}, Pi={is_pi})")
     
     try:
-        import pyttsx3
-        engine = pyttsx3.init()
+        # Get the directory where this script is located
+        # Voice model downloaded from https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_US/ryan/medium
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        model_path = os.path.join(script_dir, "en_US-ryan-medium.onnx")
         
-        # Platform-optimized defaults
-        rate = cfg.get("rate", 200 if is_macos else 150)
-        volume = cfg.get("volume", 0.9)
+        voice = PiperVoice.load(model_path)
         
-        engine.setProperty("rate", rate)
-        engine.setProperty("volume", volume)
-        
-        if voice := cfg.get("voice"):
-            engine.setProperty("voice", voice)
-        
-        print(f"[TTS] Initialized (rate={rate}, volume={volume})")
+        print(f"[TTS] Initialized with Piper voice model")
         
         return {
-            "engine": engine,
+            "voice": voice,
             "is_macos": is_macos,
             "is_pi": is_pi
         }
         
     except Exception as e:
-        print(f"[TTS] Error initializing engine: {e}")
-        return {"engine": None, "is_macos": is_macos, "is_pi": is_pi}
+        print(f"[TTS] Error initializing voice: {e}")
+        return {"voice": None, "is_macos": is_macos, "is_pi": is_pi}
 
 
 def speak(state: Dict[str, Any], text: str) -> bool:
@@ -70,21 +59,27 @@ def speak(state: Dict[str, Any], text: str) -> bool:
     if not text.strip():
         return False
     
-    engine = state.get("engine")
-    if not engine:
-        print("[TTS] No engine available")
+    voice = state.get("voice")
+    if not voice:
+        print("[TTS] No voice available")
         return False
     
     try:
         with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp:
             tmp_path = tmp.name
         
-        # Synthesize to file
-        engine.save_to_file(text, tmp_path)
-        engine.runAndWait()
+        # Synthesize to WAV file
+        with wave.open(tmp_path, "wb") as wav_file:
+            voice.synthesize_wav(text, wav_file)
         
         # Play audio using platform-specific player
-        player = "afplay" if state.get("is_macos") else "aplay"
+        if state.get("is_macos"):
+            player = "afplay"
+        elif state.get("is_pi"):
+            player = "aplay"
+        else:
+            # WSL/Linux (logic is not ARM processor)
+            player = "paplay"
         subprocess.run([player, tmp_path], check=True, capture_output=True)
         
         return True
@@ -103,23 +98,9 @@ def speak(state: Dict[str, Any], text: str) -> bool:
             pass
 
 
-def close(state: Dict[str, Any]) -> None:
-    """Cleanup TTS resources.
-    
-    Args:
-        state: TTS state from init_tts()
-    """
-    if engine := state.get("engine"):
-        try:
-            engine.stop()
-        except:
-            pass
-
-
 if __name__ == "__main__":
     # Quick test
     print("=== TTS Test ===")
     state = init_tts()
     speak(state, "AI Tour Guide system initialized. Ready for landmarks.")
-    close(state)
     print("✓ Test complete")
