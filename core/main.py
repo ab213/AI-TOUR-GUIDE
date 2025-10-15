@@ -6,6 +6,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from core.gps_parser import parse_nmea
 from core.poi_query import POIQuery
 from llm import llm_inference
+from audio.tts import init_tts, speak
 
 def main():
     """
@@ -38,6 +39,9 @@ def main():
         print(f"   Details: {e}")
         return
 
+    # Initialize TTS system
+    tts_state = init_tts()
+
     # State variable to track the last alerted POI to prevent alert spam
     last_alerted_poi_name = None
 
@@ -64,6 +68,8 @@ def main():
                         print("--------------------------------\n")
                         output = llm_inference.generate_response(nearest_poi)
                         print("AI Tour Guide says:\n", output)
+                        # Speak the response via TTS
+                        speak(tts_state, output)
                         # Update state to prevent re-alerting for the same place.
                         last_alerted_poi_name = poi_name 
                 else:
