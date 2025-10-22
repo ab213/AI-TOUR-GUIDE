@@ -1,125 +1,154 @@
-"""
-Universal Text-to-Speech module for AI Tour Guide Helmet.
-
-Supports both macOS (development) and Raspberry Pi 5 (deployment).
-Audio automatically routes to Bluetooth headphones on both platforms.
-"""
-
-import tempfile
+import pyttsx3
 import os
-import subprocess
+import tempfile
+import threading
+import queue
+import time
 import platform
-from typing import Optional, Dict, Any
+import subprocess
+import logging
+import shutil
+
+# === Logging Configuration ===
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="[%(asctime)s] [%(threadName)s] [%(levelname)s] %(message)s",
+    datefmt="%H:%M:%S"
+)
 
 
-def init_tts(config: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-    """Initialize TTS engine.
-    
-    Args:
-        config: Optional configuration dictionary
-            - rate: Speech rate (default: 200 for macOS, 150 for Pi)
-            - volume: Volume level 0.0-1.0 (default: 0.9)
-            - voice: Voice ID (optional)
-    
-    Returns:
-        TTS state dictionary containing engine and platform info
-    """
-    cfg = config or {}
-    is_macos = platform.system() == "Darwin"
-    is_pi = platform.system() == "Linux" and "arm" in platform.machine().lower()
-    
-    print(f"[TTS] Platform: {platform.system()} (macOS={is_macos}, Pi={is_pi})")
-    
-    try:
-        import pyttsx3
-        engine = pyttsx3.init()
-        
-        # Platform-optimized defaults
-        rate = cfg.get("rate", 200 if is_macos else 150)
-        volume = cfg.get("volume", 0.9)
-        
-        engine.setProperty("rate", rate)
-        engine.setProperty("volume", volume)
-        
-        if voice := cfg.get("voice"):
-            engine.setProperty("voice", voice)
-        
-        print(f"[TTS] Initialized (rate={rate}, volume={volume})")
-        
-        return {
-            "engine": engine,
-            "is_macos": is_macos,
-            "is_pi": is_pi
-        }
-        
-    except Exception as e:
-        print(f"[TTS] Error initializing engine: {e}")
-        return {"engine": None, "is_macos": is_macos, "is_pi": is_pi}
+class HybridTTS:
+    def __init__(self):
+        self.engine = pyttsx3.init()
+        self.queue = queue.Queue()
+        self.thread = threading.Thread(target=self._worker, daemon=True, name="TTS-Worker")
+        self.running = True
+        self.lock = threading.Lock()
+        self.system = platform.system()
 
+        # Configure speaking rate
+        rate = self.engine.getProperty("rate")
+        self.engine.setProperty("rate", 200)
+        logging.info(f"[INIT] Engine ready (rate={rate}) on {self.system} ✅")
 
-def speak(state: Dict[str, Any], text: str) -> bool:
-    """Speak text via Bluetooth headphones.
-    
-    Args:
-        state: TTS state from init_tts()
-        text: Text to speak
-    
-    Returns:
-        True if successful, False otherwise
-    """
-    if not text.strip():
-        return False
-    
-    engine = state.get("engine")
-    if not engine:
-        print("[TTS] No engine available")
-        return False
-    
-    try:
-        with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp:
-            tmp_path = tmp.name
-        
-        # Synthesize to file
-        engine.save_to_file(text, tmp_path)
-        engine.runAndWait()
-        
-        # Play audio using platform-specific player
-        player = "afplay" if state.get("is_macos") else "aplay"
-        subprocess.run([player, tmp_path], check=True, capture_output=True)
-        
-        return True
-        
-    except subprocess.CalledProcessError as e:
-        print(f"[TTS] Playback error: {e}")
-        return False
-    except Exception as e:
-        print(f"[TTS] Error: {e}")
-        return False
-    finally:
-        # Cleanup temp file
+        # Optional: check if Bluetooth speaker is connected
+        self._check_bluetooth_audio()
+
+        self.thread.start()
+
+    # === Bluetooth Detection ===
+    def _check_bluetooth_audio(self):
         try:
-            os.remove(tmp_path)
-        except:
-            pass
+            if self.system == "Darwin":
+                result = subprocess.run(
+                    ["system_profiler", "SPBluetoothDataType"],
+                    capture_output=True,
+                    text=True
+                )
+                if "Connected: Yes" in result.stdout:
+                    logging.info("[BT] Bluetooth speaker detected 🎧")
+                else:
+                    logging.warning("[BT] No Bluetooth audio device found 🔊")
 
+            elif self.system == "Linux":
+                result = subprocess.run(["pactl", "list", "sinks"], capture_output=True, text=True)
+                if "bluez" in result.stdout.lower():
+                    logging.info("[BT] Bluetooth speaker connected 🎧")
+                else:
+                    logging.warning("[BT] No Bluetooth sink detected, using default ALSA 🔊")
 
-def close(state: Dict[str, Any]) -> None:
-    """Cleanup TTS resources.
-    
-    Args:
-        state: TTS state from init_tts()
-    """
-    if engine := state.get("engine"):
+        except Exception as e:
+            logging.debug(f"[BT] Bluetooth check skipped or failed: {e}")
+
+    # === Worker Thread ===
+    def _worker(self):
+        logging.debug("[THREAD] Started worker loop...")
+        while self.running:
+            try:
+                text = self.queue.get(timeout=1)
+                if text is None:
+                    break
+                self._speak_text(text)
+                self.queue.task_done()
+            except queue.Empty:
+                continue
+            except Exception as e:
+                logging.exception(f"[ERROR] Worker exception: {e}")
+        logging.debug("[THREAD] Worker loop ended.")
+
+    # === Speak Text ===
+    def _speak_text(self, text: str):
+        logging.info(f"[THREAD] Speaking text ({len(text)} chars)")
         try:
-            engine.stop()
-        except:
-            pass
+            if self.system == "Darwin":
+                self._speak_system_macos(text)
+            elif self.system == "Linux":
+                self._speak_system_linux(text)
+            else:
+                self._speak_pyttsx3(text)
+        except Exception as e:
+            logging.exception(f"[ERROR] Speak failed: {e}")
+
+    # === macOS: use built-in 'say' ===
+    def _speak_system_macos(self, text: str):
+        with self.lock:
+            logging.debug(f"[MACOS] Using 'say' command for text: {text[:50]}...")
+            subprocess.run(["say", text])
+            logging.debug("[MACOS] Completed 'say' playback ✅")
+
+    # === Linux (Raspberry Pi): use espeak/aplay fallback ===
+    def _speak_system_linux(self, text: str):
+        with self.lock:
+            logging.debug(f"[LINUX] Preparing to speak: {text[:50]}...")
+            if shutil.which("espeak"):
+                logging.debug("[LINUX] Using 'espeak' for playback")
+                subprocess.run(["espeak", text])
+            elif shutil.which("aplay"):
+                with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmpfile:
+                    path = tmpfile.name
+                self.engine.save_to_file(text, path)
+                self.engine.runAndWait()
+                subprocess.run(["aplay", path])
+                os.remove(path)
+            else:
+                logging.warning("[LINUX] No TTS backend found, falling back to pyttsx3 engine")
+                self.engine.say(text)
+                self.engine.runAndWait()
+            logging.debug("[LINUX] Completed playback ✅")
+
+    # === Generic Fallback ===
+    def _speak_pyttsx3(self, text: str):
+        with self.lock:
+            self.engine.say(text)
+            self.engine.runAndWait()
+        logging.debug("[GENERIC] Playback done ✅")
+
+    # === Queue Handling ===
+    def say(self, text: str):
+        if not text.strip():
+            logging.debug("[QUEUE] Ignored empty text")
+            return
+        self.queue.put(text)
+        logging.info(f"[QUEUE] Added text → size={self.queue.qsize()}")
+
+    # === Graceful Shutdown ===
+    def stop(self):
+        logging.info("[CLOSE] Stopping TTS...")
+        self.running = False
+        self.queue.put(None)
+        self.thread.join(timeout=5)
+        self.engine.stop()
+        logging.info("[CLOSE] Engine stopped cleanly ✅")
 
 
+# === TESTING ===
 if __name__ == "__main__":
-    # Quick test
-    print("=== TTS Test ===")
-    state = init_tts()
-    speak(state, "AI Tour Guide system initialized. Ready for landmarks.")
-    close(state)
-    print("✓ Test complete")
+    tts = HybridTTS()
+    try:
+        logging.info("[TEST] Starting multi-queue test 🚀")
+        tts.say("Hello Aditya, the hybrid text to speech system is now online.")
+        tts.say("This is the second message. It should play after the first one.")
+        tts.say("Finally, this confirms all queues, locks, and threading are working.")
+        time.sleep(20)
+    finally:
+        tts.stop()
