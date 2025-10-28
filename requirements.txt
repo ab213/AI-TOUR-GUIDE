@@ -2,4 +2,4 @@ pyserial
 pynmea2
 pynmeagps==1.0.51
 numba
-piper-tts
+pyttsx3
