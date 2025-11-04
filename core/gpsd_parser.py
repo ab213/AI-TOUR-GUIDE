@@ -1,13 +1,25 @@
-# core/gpsd_parser.py
 """
 gpsd_parser.py — reads live GPS data from gpsd and yields structured dicts
 compatible with the NMEA parser (lat/lon/time/speed/alt).
 """
 
 from typing import Generator, Dict, Optional
-import gps
 import time
 import logging
+import json
+
+# --- 🔧 Monkeypatch for gpsd JSONDecoder encoding bug ---
+if "encoding" not in json.JSONDecoder.__init__.__code__.co_varnames:
+    old_init = json.JSONDecoder.__init__
+
+    def new_init(self, *args, **kwargs):
+        kwargs.pop("encoding", None)  # drop deprecated arg safely
+        old_init(self, *args, **kwargs)
+
+    json.JSONDecoder.__init__ = new_init
+# --------------------------------------------------------
+
+import gps  # ⬅️ must come AFTER the patch
 
 def parse_gpsd() -> Generator[Dict[str, Optional[float]], None, None]:
     """
@@ -30,9 +42,11 @@ def parse_gpsd() -> Generator[Dict[str, Optional[float]], None, None]:
     while True:
         try:
             report = session.next()
+            logging.debug(f"[GPSD] Report received: {report}")
 
             # gpsd returns many report classes — we only want TPV (Time-Position-Velocity)
             if report["class"] != "TPV":
+                logging.debug(f"[GPSD] Skipped report class: {report.get('class')}")
                 continue
 
             data = {
@@ -59,3 +73,28 @@ def parse_gpsd() -> Generator[Dict[str, Optional[float]], None, None]:
         except Exception as e:
             logging.error(f"[GPSD] Error reading gpsd data: {e}")
             time.sleep(1)
+if __name__ == "__main__":
+    import logging
+
+    logging.basicConfig(
+        level=logging.INFO,
+        format="[%(asctime)s] [%(levelname)s] %(message)s",
+        datefmt="%H:%M:%S",
+    )
+
+    print("Starting GPSD parser test - press Ctrl+C to stop")
+
+    try:
+        count = 0
+        for gps_data in parse_gpsd():
+            print(f"GPS Data: {gps_data}")
+            count += 1
+            if count >= 10:  # Stop after 10 updates for test
+                break
+    except KeyboardInterrupt:
+        print("\nTest interrupted by user")
+    except Exception as e:
+        logging.error(f"Unexpected error in test: {e}")
+
+    print("GPSD parser test completed")
+

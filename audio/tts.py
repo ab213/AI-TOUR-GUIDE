@@ -11,7 +11,7 @@ import shutil
 
 # === Logging Configuration ===
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.INFO,
     format="[%(asctime)s] [%(threadName)s] [%(levelname)s] %(message)s",
     datefmt="%H:%M:%S"
 )
@@ -108,8 +108,12 @@ class HybridTTS:
                     path = tmpfile.name
                 self.engine.save_to_file(text, path)
                 self.engine.runAndWait()
-                subprocess.run(["aplay", path])
+                # Convert to 16-bit 22050Hz before play
+                converted_path = path.replace('.wav', '_converted.wav')
+                subprocess.run(["ffmpeg", "-y", "-i", path, "-ar", "22050", "-ac", "1", "-sample_fmt", "s16", converted_path], check=True)
+                subprocess.run(["aplay", converted_path])
                 os.remove(path)
+                os.remove(converted_path)
             else:
                 logging.warning("[LINUX] No TTS backend found, falling back to pyttsx3 engine")
                 self.engine.say(text)

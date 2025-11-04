@@ -31,7 +31,7 @@ logging.basicConfig(
 # === Configuration ===
 class Config:
     """Centralized configuration for deployment adjustments"""
-    ALERT_DISTANCE_MILES = 0.15
+    ALERT_DISTANCE_MILES = 0.25
     POI_COOLDOWN_MINUTES = 30
     IS_RASPBERRY_PI = os.path.exists('/proc/device-tree/model')
     GPS_SERIAL_PORT = "/dev/ttyAMA0" if IS_RASPBERRY_PI else "/dev/ttys009"
@@ -127,6 +127,7 @@ class TourGuideSystem:
 
             if clean_output:
                 self.tts.say(clean_output)
+                self.tts.queue.join()
 
             self.last_alerted_poi_name = poi_name
             self.last_alert_times[poi_name] = datetime.now()

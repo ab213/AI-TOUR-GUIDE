@@ -126,5 +126,9 @@
     "[-84.3239, 33.7925]": {
         "name": "Emory University",
         "city": "Atlanta"
+    },
+    "[-84.3881, 33.7492]": {
+	"name": "Georgia State Capitol",
+	"city": "Atlanta"
     }
 }
