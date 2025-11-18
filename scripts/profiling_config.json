@@ -1,0 +1,67 @@
+{
+  "models": [
+    {
+      "name": "SmolLM2-135M",
+      "hf_path": "HF://mlc-ai/SmolLM2-135M-Instruct-q0f32-MLC",
+      "quantization": "None (Full Precision)",
+      "activation_precision": "32-bit"
+    },
+    {
+      "name": "SmolLM2-135M",
+      "hf_path": "HF://mlc-ai/SmolLM2-135M-Instruct-q4f32_1-MLC",
+      "quantization": "INT4",
+      "activation_precision": "32-bit"
+    },
+    {
+      "name": "SmolLM2-135M",
+      "hf_path": "HF://mlc-ai/SmolLM2-135M-Instruct-q0f16-MLC",
+      "quantization": "None (Full Precision)",
+      "activation_precision": "16-bit"
+    },
+    {
+      "name": "SmolLM2-135M",
+      "hf_path": "HF://mlc-ai/SmolLM2-135M-Instruct-q4f16_1-MLC",
+      "quantization": "INT4",
+      "activation_precision": "16-bit"
+    },
+    {
+      "name": "Qwen2-0.5B-Instruct",
+      "hf_path": "HF://mlc-ai/Qwen2-0.5B-Instruct-q0f32-MLC",
+      "quantization": "None (Full Precision)",
+      "activation_precision": "32-bit"
+    },
+    {
+      "name": "Qwen2-0.5B-Instruct",
+      "hf_path": "HF://mlc-ai/Qwen2-0.5B-Instruct-q4f32_1-MLC",
+      "quantization": "INT4",
+      "activation_precision": "32-bit"
+    },
+    {
+      "name": "Qwen2-0.5B-Instruct",
+      "hf_path": "HF://mlc-ai/Qwen2-0.5B-Instruct-q0f16-MLC",
+      "quantization": "None (Full Precision)",
+      "activation_precision": "16-bit"
+    },
+    {
+      "name": "Qwen2-0.5B-Instruct",
+      "hf_path": "HF://mlc-ai/Qwen2-0.5B-Instruct-q4f16_1-MLC",
+      "quantization": "INT4",
+      "activation_precision": "16-bit"
+    }
+  ],
+  "prefill_lengths": [256, 1024, 2048],
+  "decode_lengths": [128, 512],
+  "test_prompt_template": "Tell me about {topic} in exactly {length} words.",
+  "test_topics": [
+    "artificial intelligence",
+    "quantum computing",
+    "renewable energy"
+  ],
+  "output_dir": "profiling_results",
+  "power_coefficient": 2.5,
+  "warmup_runs": 1,
+  "measured_runs": 3,
+  "device": "cpu"
+}
+
+
