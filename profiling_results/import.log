@@ -1,0 +1,11 @@
+nohup: ignoring input
+============================================================
+LLM Profiling System
+============================================================
+Config: scripts/profiling_config.json
+Output: profiling_results
+Models: 8
+Prefill lengths: [256, 1024, 2048]
+Decode lengths: [128, 512]
+============================================================
+Imported 126 entries from log into profiling_results/results.csv
