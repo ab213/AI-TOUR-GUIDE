@@ -1,0 +1,1150 @@
+nohup: ignoring input
+============================================================
+LLM Profiling System
+============================================================
+Config: scripts/profiling_config.json
+Output: profiling_results
+Models: 8
+Prefill lengths: [256, 1024, 2048]
+Decode lengths: [128, 512]
+============================================================
+
+[1/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | None (Full Precision) | 32-bit | Prefill:256 | Decode:128
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q0f32-MLC
+[20:23:41] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[20:23:41] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[20:23:41] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 576387, prefill chunk size will be set to 8192. 
+[20:23:41] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[20:23:41] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 1206.828 MB (Parameters: 513.134 MB. KVCache: 252.635 MB. Temporary buffer: 441.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.131s prefill, 15.943s decode
+  Run 2/3 - Latency: 0.131s prefill, 17.148s decode
+  Run 3/3 - Latency: 0.135s prefill, 17.954s decode
+
+[2/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | None (Full Precision) | 32-bit | Prefill:256 | Decode:512
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q0f32-MLC
+[20:25:13] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[20:25:13] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[20:25:13] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 576387, prefill chunk size will be set to 8192. 
+[20:25:13] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[20:25:13] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 1206.828 MB (Parameters: 513.134 MB. KVCache: 252.635 MB. Temporary buffer: 441.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.153s prefill, 80.979s decode
+  Run 2/3 - Latency: 0.176s prefill, 87.423s decode
+  Run 3/3 - Latency: 0.177s prefill, 74.643s decode
+
+[3/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | None (Full Precision) | 32-bit | Prefill:1024 | Decode:128
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q0f32-MLC
+[20:31:05] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[20:31:05] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[20:31:05] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 576387, prefill chunk size will be set to 8192. 
+[20:31:05] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[20:31:05] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 1206.828 MB (Parameters: 513.134 MB. KVCache: 252.635 MB. Temporary buffer: 441.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.230s prefill, 24.636s decode
+  Run 2/3 - Latency: 0.238s prefill, 24.625s decode
+  Run 3/3 - Latency: 0.238s prefill, 24.854s decode
+
+[4/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | None (Full Precision) | 32-bit | Prefill:1024 | Decode:512
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q0f32-MLC
+[20:34:35] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[20:34:35] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[20:34:35] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 576387, prefill chunk size will be set to 8192. 
+[20:34:35] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[20:34:35] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 1206.828 MB (Parameters: 513.134 MB. KVCache: 252.635 MB. Temporary buffer: 441.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.237s prefill, 71.086s decode
+  Run 2/3 - Latency: 0.238s prefill, 50.778s decode
+  Run 3/3 - Latency: 0.238s prefill, 60.981s decode
+
+[5/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | None (Full Precision) | 32-bit | Prefill:2048 | Decode:128
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q0f32-MLC
+[20:41:15] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[20:41:15] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[20:41:15] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 576387, prefill chunk size will be set to 8192. 
+[20:41:15] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[20:41:15] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 1206.828 MB (Parameters: 513.134 MB. KVCache: 252.635 MB. Temporary buffer: 441.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.284s prefill, 30.440s decode
+  Run 2/3 - Latency: 0.285s prefill, 31.083s decode
+  Run 3/3 - Latency: 0.285s prefill, 31.837s decode
+
+[6/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | None (Full Precision) | 32-bit | Prefill:2048 | Decode:512
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q0f32-MLC
+[20:47:25] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[20:47:25] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[20:47:25] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 576387, prefill chunk size will be set to 8192. 
+[20:47:25] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[20:47:25] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 1206.828 MB (Parameters: 513.134 MB. KVCache: 252.635 MB. Temporary buffer: 441.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.287s prefill, 140.529s decode
+  Run 2/3 - Latency: 0.286s prefill, 102.399s decode
+  Run 3/3 - Latency: 0.286s prefill, 83.117s decode
+
+[7/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | INT4 | 32-bit | Prefill:256 | Decode:128
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q4f32_1-MLC
+[20:59:08] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[20:59:08] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[20:59:08] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 596085, prefill chunk size will be set to 8192. 
+[20:59:08] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[20:59:08] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 773.985 MB (Parameters: 80.290 MB. KVCache: 252.635 MB. Temporary buffer: 441.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.614s prefill, 28.511s decode
+  Run 2/3 - Latency: 0.623s prefill, 29.175s decode
+  Run 3/3 - Latency: 0.616s prefill, 29.227s decode
+
+[8/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | INT4 | 32-bit | Prefill:256 | Decode:512
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q4f32_1-MLC
+[21:01:39] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[21:01:39] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[21:01:39] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 596085, prefill chunk size will be set to 8192. 
+[21:01:39] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[21:01:39] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 773.985 MB (Parameters: 80.290 MB. KVCache: 252.635 MB. Temporary buffer: 441.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.615s prefill, 125.233s decode
+  Run 2/3 - Latency: 0.620s prefill, 125.771s decode
+  Run 3/3 - Latency: 0.624s prefill, 126.842s decode
+
+[9/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | INT4 | 32-bit | Prefill:1024 | Decode:128
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q4f32_1-MLC
+[21:10:32] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[21:10:32] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[21:10:32] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 596085, prefill chunk size will be set to 8192. 
+[21:10:32] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[21:10:32] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 773.985 MB (Parameters: 80.290 MB. KVCache: 252.635 MB. Temporary buffer: 441.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.652s prefill, 31.057s decode
+  Run 2/3 - Latency: 0.651s prefill, 32.067s decode
+  Run 3/3 - Latency: 0.883s prefill, 32.417s decode
+
+[10/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | INT4 | 32-bit | Prefill:1024 | Decode:512
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q4f32_1-MLC
+[21:14:39] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[21:14:39] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[21:14:39] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 596085, prefill chunk size will be set to 8192. 
+[21:14:39] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[21:14:39] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 773.985 MB (Parameters: 80.290 MB. KVCache: 252.635 MB. Temporary buffer: 441.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.652s prefill, 141.310s decode
+  Run 2/3 - Latency: 0.655s prefill, 144.008s decode
+  Run 3/3 - Latency: 0.653s prefill, 11.969s decode
+
+[11/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | INT4 | 32-bit | Prefill:2048 | Decode:128
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q4f32_1-MLC
+[21:23:47] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[21:23:47] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[21:23:47] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 596085, prefill chunk size will be set to 8192. 
+[21:23:47] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[21:23:47] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 773.985 MB (Parameters: 80.290 MB. KVCache: 252.635 MB. Temporary buffer: 441.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.699s prefill, 11.492s decode
+  Run 2/3 - Latency: 0.704s prefill, 6.688s decode
+  Run 3/3 - Latency: 0.698s prefill, 37.427s decode
+
+[12/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | INT4 | 32-bit | Prefill:2048 | Decode:512
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q4f32_1-MLC
+[21:29:28] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[21:29:28] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[21:29:28] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 596085, prefill chunk size will be set to 8192. 
+[21:29:28] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[21:29:28] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 773.985 MB (Parameters: 80.290 MB. KVCache: 252.635 MB. Temporary buffer: 441.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.708s prefill, 166.883s decode
+  Run 2/3 - Latency: 0.701s prefill, 169.638s decode
+  Run 3/3 - Latency: 0.701s prefill, 170.004s decode
+
+[13/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | None (Full Precision) | 16-bit | Prefill:256 | Decode:128
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q0f16-MLC
+0it [00:00, ?it/s]
+100%|██████████| 8/8 [00:25<00:00,  3.13s/it]
+[2025-11-18 21:45:05] INFO auto_config.py:70: Found model configuration: /home/pi/test_env/mlc-llm/model_weights/hf/mlc-ai/SmolLM2-135M-Instruct-q0f16-MLC/mlc-chat-config.json
+[2025-11-18 21:45:05] INFO auto_target.py:91: Detecting target device: cpu:0
+[2025-11-18 21:45:05] INFO auto_target.py:93: Found target: {'kind': 'llvm', 'tag': '', 'keys': ['arm_cpu', 'cpu'], 'mcpu': 'cortex-a76', 'mtriple': 'aarch64-unknown-linux-gnu'}
+[2025-11-18 21:45:05] INFO auto_target.py:110: Found host LLVM triple: aarch64-unknown-linux-gnu
+[2025-11-18 21:45:05] INFO auto_target.py:111: Found host LLVM CPU: cortex-a76
+[2025-11-18 21:45:05] INFO auto_config.py:154: Found model type: llama. Use `--model-type` to override.
+[2025-11-18 21:45:05] INFO compile.py:140: Creating model from: LlamaConfig(hidden_size=576, intermediate_size=1536, num_attention_heads=9, num_hidden_layers=30, rms_norm_eps=1e-05, vocab_size=49152, tie_word_embeddings=True, position_embedding_base=100000, rope_scaling=None, context_window_size=8192, prefill_chunk_size=8192, num_key_value_heads=3, head_dim=64, tensor_parallel_shards=1, pipeline_parallel_stages=1, max_batch_size=128, disaggregation=False, kwargs={})
+[2025-11-18 21:45:05] INFO compile.py:158: Exporting the model to TVM compiler
+[2025-11-18 21:45:06] INFO compile.py:164: Running optimizations using TVM
+[2025-11-18 21:45:06] INFO compile.py:186: Registering metadata: {'model_type': 'llama', 'quantization': 'q0f16', 'context_window_size': 8192, 'sliding_window_size': -1, 'attention_sink_size': -1, 'prefill_chunk_size': 8192, 'tensor_parallel_shards': 1, 'pipeline_parallel_stages': 1, 'disaggregation': False, 'kv_state_kind': 'kv_cache', 'max_batch_size': 128}
+[2025-11-18 21:45:07] INFO pipeline.py:57: Running TVM Relax graph-level optimizations
+[2025-11-18 21:45:09] INFO pipeline.py:57: Lowering to TVM TIR kernels
+[21:45:11] /home/pi/test_env/tvm/include/tvm/topi/transform.h:1232: Warning: Fast mode segfaults when there are out-of-bounds indices. Make sure input indices are in bound
+[21:45:11] /home/pi/test_env/tvm/include/tvm/topi/transform.h:1232: Warning: Fast mode segfaults when there are out-of-bounds indices. Make sure input indices are in bound
+[21:45:12] /home/pi/test_env/tvm/include/tvm/topi/transform.h:1232: Warning: Fast mode segfaults when there are out-of-bounds indices. Make sure input indices are in bound
+[2025-11-18 21:45:18] INFO pipeline.py:57: Running TVM TIR-level optimizations
+[2025-11-18 21:45:26] INFO pipeline.py:57: Running TVM Dlight low-level optimizations
+[2025-11-18 21:45:30] INFO pipeline.py:57: Lowering to VM bytecode
+[2025-11-18 21:45:31] INFO estimate_memory_usage.py:58: [Memory usage] Function `alloc_embedding_tensor`: 9.00 MB
+[2025-11-18 21:45:31] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_decode`: 1.50 MB
+[2025-11-18 21:45:31] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_decode_to_last_hidden_states`: 1.64 MB
+[2025-11-18 21:45:31] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_prefill`: 96.14 MB
+[2025-11-18 21:45:31] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_prefill_to_last_hidden_states`: 105.00 MB
+[2025-11-18 21:45:31] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_select_last_hidden_states`: 0.14 MB
+[2025-11-18 21:45:31] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_verify`: 96.00 MB
+[2025-11-18 21:45:31] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_verify_to_last_hidden_states`: 105.00 MB
+[2025-11-18 21:45:31] INFO estimate_memory_usage.py:58: [Memory usage] Function `create_tir_paged_kv_cache`: 0.00 MB
+[2025-11-18 21:45:31] INFO estimate_memory_usage.py:58: [Memory usage] Function `decode`: 0.01 MB
+[2025-11-18 21:45:31] INFO estimate_memory_usage.py:58: [Memory usage] Function `decode_to_last_hidden_states`: 0.01 MB
+[2025-11-18 21:45:31] INFO estimate_memory_usage.py:58: [Memory usage] Function `embed`: 9.00 MB
+[2025-11-18 21:45:31] INFO estimate_memory_usage.py:58: [Memory usage] Function `gather_hidden_states`: 0.00 MB
+[2025-11-18 21:45:31] INFO estimate_memory_usage.py:58: [Memory usage] Function `get_logits`: 0.00 MB
+[2025-11-18 21:45:31] INFO estimate_memory_usage.py:58: [Memory usage] Function `prefill`: 96.00 MB
+[2025-11-18 21:45:31] INFO estimate_memory_usage.py:58: [Memory usage] Function `prefill_to_last_hidden_states`: 105.00 MB
+[2025-11-18 21:45:31] INFO estimate_memory_usage.py:58: [Memory usage] Function `scatter_hidden_states`: 0.00 MB
+[2025-11-18 21:45:31] INFO estimate_memory_usage.py:58: [Memory usage] Function `softmax_with_temperature`: 0.00 MB
+[2025-11-18 21:45:32] INFO pipeline.py:57: Compiling external modules
+[2025-11-18 21:45:32] INFO pipeline.py:57: Compilation complete! Exporting to disk
+[2025-11-18 21:52:09] INFO model_metadata.py:94: Total memory usage without KV cache: 361.57 MB (Parameters: 256.57 MB. Temporary buffer: 105.00 MB)
+[2025-11-18 21:52:09] INFO model_metadata.py:128: KV cache size: 0.02 MB per token in the context window
+[2025-11-18 21:52:09] INFO model_metadata.py:133: Total memory usage with a 4K KV cache: 451.57 MB
+[2025-11-18 21:52:09] INFO model_metadata.py:139: To reduce memory usage, tweak `prefill_chunk_size`, `context_window_size` and `sliding_window_size`
+[2025-11-18 21:52:09] INFO compile.py:208: Generated: /tmp/tmp8didg598/lib.so
+Compiling with arguments:
+  --config          LlamaConfig(hidden_size=576, intermediate_size=1536, num_attention_heads=9, num_hidden_layers=30, rms_norm_eps=1e-05, vocab_size=49152, tie_word_embeddings=True, position_embedding_base=100000, rope_scaling=None, context_window_size=8192, prefill_chunk_size=8192, num_key_value_heads=3, head_dim=64, tensor_parallel_shards=1, pipeline_parallel_stages=1, max_batch_size=128, disaggregation=False, kwargs={})
+  --quantization    NoQuantize(name='q0f16', kind='no-quant', model_dtype='float16')
+  --model-type      llama
+  --target          {'kind': 'llvm', 'tag': '', 'keys': ['arm_cpu', 'cpu'], 'host': {'kind': 'llvm', 'tag': '', 'keys': ['arm_cpu', 'cpu'], 'mcpu': 'cortex-a76', 'mtriple': 'aarch64-unknown-linux-gnu'}, 'mcpu': 'cortex-a76', 'mtriple': 'aarch64-unknown-linux-gnu'}
+  --opt             flashinfer=0;cublas_gemm=0;faster_transformer=0;cudagraph=0;cutlass=0;ipc_allreduce_strategy=NONE
+  --system-lib-prefix ""
+  --output          /tmp/tmp8didg598/lib.so
+  --overrides       context_window_size=None;sliding_window_size=None;prefill_chunk_size=None;attention_sink_size=None;max_batch_size=None;tensor_parallel_shards=None;pipeline_parallel_stages=None;disaggregation=None
+[21:52:11] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[21:52:11] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[21:52:11] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 597619, prefill chunk size will be set to 8192. 
+[21:52:11] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[21:52:11] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 740.261 MB (Parameters: 256.567 MB. KVCache: 252.635 MB. Temporary buffer: 231.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.169s prefill, 14.726s decode
+  Run 2/3 - Latency: 0.199s prefill, 14.786s decode
+  Run 3/3 - Latency: 0.198s prefill, 14.800s decode
+
+[14/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | None (Full Precision) | 16-bit | Prefill:256 | Decode:512
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q0f16-MLC
+[21:53:37] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[21:53:37] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[21:53:37] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 597619, prefill chunk size will be set to 8192. 
+[21:53:37] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[21:53:37] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 740.261 MB (Parameters: 256.567 MB. KVCache: 252.635 MB. Temporary buffer: 231.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.204s prefill, 66.754s decode
+  Run 2/3 - Latency: 0.197s prefill, 60.928s decode
+  Run 3/3 - Latency: 0.197s prefill, 70.428s decode
+
+[15/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | None (Full Precision) | 16-bit | Prefill:1024 | Decode:128
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q0f16-MLC
+[21:58:14] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[21:58:14] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[21:58:14] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 597619, prefill chunk size will be set to 8192. 
+[21:58:14] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[21:58:14] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 740.261 MB (Parameters: 256.567 MB. KVCache: 252.635 MB. Temporary buffer: 231.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.199s prefill, 18.547s decode
+  Run 2/3 - Latency: 0.230s prefill, 18.581s decode
+  Run 3/3 - Latency: 0.230s prefill, 2.846s decode
+
+[16/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | None (Full Precision) | 16-bit | Prefill:1024 | Decode:512
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q0f16-MLC
+[22:01:01] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[22:01:01] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[22:01:01] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 597619, prefill chunk size will be set to 8192. 
+[22:01:01] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[22:01:01] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 740.261 MB (Parameters: 256.567 MB. KVCache: 252.635 MB. Temporary buffer: 231.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.230s prefill, 80.868s decode
+  Run 2/3 - Latency: 0.230s prefill, 85.074s decode
+  Run 3/3 - Latency: 0.230s prefill, 85.708s decode
+
+[17/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | None (Full Precision) | 16-bit | Prefill:2048 | Decode:128
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q0f16-MLC
+[22:07:39] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[22:07:39] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[22:07:39] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 597619, prefill chunk size will be set to 8192. 
+[22:07:39] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[22:07:39] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 740.261 MB (Parameters: 256.567 MB. KVCache: 252.635 MB. Temporary buffer: 231.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.234s prefill, 23.622s decode
+  Run 2/3 - Latency: 0.234s prefill, 23.665s decode
+  Run 3/3 - Latency: 0.273s prefill, 23.648s decode
+
+[18/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | None (Full Precision) | 16-bit | Prefill:2048 | Decode:512
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q0f16-MLC
+[22:12:58] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[22:12:58] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[22:12:58] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 597619, prefill chunk size will be set to 8192. 
+[22:12:58] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[22:12:58] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 740.261 MB (Parameters: 256.567 MB. KVCache: 252.635 MB. Temporary buffer: 231.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.273s prefill, 78.813s decode
+  Run 2/3 - Latency: 0.278s prefill, 80.890s decode
+  Run 3/3 - Latency: 0.273s prefill, 1.304s decode
+
+[19/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | INT4 | 16-bit | Prefill:256 | Decode:128
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q4f16_1-MLC
+0it [00:00, ?it/s]
+100%|██████████| 3/3 [00:05<00:00,  1.87s/it]
+[2025-11-18 22:21:06] INFO auto_config.py:70: Found model configuration: /home/pi/test_env/mlc-llm/model_weights/hf/mlc-ai/SmolLM2-135M-Instruct-q4f16_1-MLC/mlc-chat-config.json
+[2025-11-18 22:21:06] INFO auto_target.py:91: Detecting target device: cpu:0
+[2025-11-18 22:21:06] INFO auto_target.py:93: Found target: {'kind': 'llvm', 'tag': '', 'keys': ['arm_cpu', 'cpu'], 'mcpu': 'cortex-a76', 'mtriple': 'aarch64-unknown-linux-gnu'}
+[2025-11-18 22:21:06] INFO auto_target.py:110: Found host LLVM triple: aarch64-unknown-linux-gnu
+[2025-11-18 22:21:06] INFO auto_target.py:111: Found host LLVM CPU: cortex-a76
+[2025-11-18 22:21:06] INFO auto_config.py:154: Found model type: llama. Use `--model-type` to override.
+[2025-11-18 22:21:06] INFO compile.py:140: Creating model from: LlamaConfig(hidden_size=576, intermediate_size=1536, num_attention_heads=9, num_hidden_layers=30, rms_norm_eps=1e-05, vocab_size=49152, tie_word_embeddings=True, position_embedding_base=100000, rope_scaling=None, context_window_size=8192, prefill_chunk_size=8192, num_key_value_heads=3, head_dim=64, tensor_parallel_shards=1, pipeline_parallel_stages=1, max_batch_size=128, disaggregation=False, kwargs={})
+[2025-11-18 22:21:06] INFO compile.py:158: Exporting the model to TVM compiler
+[2025-11-18 22:21:09] INFO compile.py:164: Running optimizations using TVM
+[2025-11-18 22:21:09] INFO compile.py:186: Registering metadata: {'model_type': 'llama', 'quantization': 'q4f16_1', 'context_window_size': 8192, 'sliding_window_size': -1, 'attention_sink_size': -1, 'prefill_chunk_size': 8192, 'tensor_parallel_shards': 1, 'pipeline_parallel_stages': 1, 'disaggregation': False, 'kv_state_kind': 'kv_cache', 'max_batch_size': 128}
+[2025-11-18 22:21:10] INFO pipeline.py:57: Running TVM Relax graph-level optimizations
+[2025-11-18 22:21:13] INFO pipeline.py:57: Lowering to TVM TIR kernels
+[22:21:15] /home/pi/test_env/tvm/include/tvm/topi/transform.h:1232: Warning: Fast mode segfaults when there are out-of-bounds indices. Make sure input indices are in bound
+[22:21:15] /home/pi/test_env/tvm/include/tvm/topi/transform.h:1232: Warning: Fast mode segfaults when there are out-of-bounds indices. Make sure input indices are in bound
+[22:21:16] /home/pi/test_env/tvm/include/tvm/topi/transform.h:1232: Warning: Fast mode segfaults when there are out-of-bounds indices. Make sure input indices are in bound
+[2025-11-18 22:21:21] INFO pipeline.py:57: Running TVM TIR-level optimizations
+[2025-11-18 22:21:36] INFO pipeline.py:57: Running TVM Dlight low-level optimizations
+[2025-11-18 22:21:39] INFO pipeline.py:57: Lowering to VM bytecode
+[2025-11-18 22:21:41] INFO estimate_memory_usage.py:58: [Memory usage] Function `alloc_embedding_tensor`: 9.00 MB
+[2025-11-18 22:21:41] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_decode`: 1.50 MB
+[2025-11-18 22:21:41] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_decode_to_last_hidden_states`: 1.64 MB
+[2025-11-18 22:21:41] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_prefill`: 96.14 MB
+[2025-11-18 22:21:41] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_prefill_to_last_hidden_states`: 105.00 MB
+[2025-11-18 22:21:41] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_select_last_hidden_states`: 0.14 MB
+[2025-11-18 22:21:41] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_verify`: 96.00 MB
+[2025-11-18 22:21:41] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_verify_to_last_hidden_states`: 105.00 MB
+[2025-11-18 22:21:41] INFO estimate_memory_usage.py:58: [Memory usage] Function `create_tir_paged_kv_cache`: 0.00 MB
+[2025-11-18 22:21:41] INFO estimate_memory_usage.py:58: [Memory usage] Function `decode`: 0.01 MB
+[2025-11-18 22:21:41] INFO estimate_memory_usage.py:58: [Memory usage] Function `decode_to_last_hidden_states`: 0.01 MB
+[2025-11-18 22:21:41] INFO estimate_memory_usage.py:58: [Memory usage] Function `embed`: 9.00 MB
+[2025-11-18 22:21:41] INFO estimate_memory_usage.py:58: [Memory usage] Function `gather_hidden_states`: 0.00 MB
+[2025-11-18 22:21:41] INFO estimate_memory_usage.py:58: [Memory usage] Function `get_logits`: 0.00 MB
+[2025-11-18 22:21:41] INFO estimate_memory_usage.py:58: [Memory usage] Function `prefill`: 96.00 MB
+[2025-11-18 22:21:41] INFO estimate_memory_usage.py:58: [Memory usage] Function `prefill_to_last_hidden_states`: 105.00 MB
+[2025-11-18 22:21:41] INFO estimate_memory_usage.py:58: [Memory usage] Function `scatter_hidden_states`: 0.00 MB
+[2025-11-18 22:21:41] INFO estimate_memory_usage.py:58: [Memory usage] Function `softmax_with_temperature`: 0.00 MB
+[2025-11-18 22:21:43] INFO pipeline.py:57: Compiling external modules
+[2025-11-18 22:21:43] INFO pipeline.py:57: Compilation complete! Exporting to disk
+[2025-11-18 22:23:30] INFO model_metadata.py:94: Total memory usage without KV cache: 177.21 MB (Parameters: 72.21 MB. Temporary buffer: 105.00 MB)
+[2025-11-18 22:23:30] INFO model_metadata.py:128: KV cache size: 0.02 MB per token in the context window
+[2025-11-18 22:23:30] INFO model_metadata.py:133: Total memory usage with a 4K KV cache: 267.21 MB
+[2025-11-18 22:23:30] INFO model_metadata.py:139: To reduce memory usage, tweak `prefill_chunk_size`, `context_window_size` and `sliding_window_size`
+[2025-11-18 22:23:30] INFO compile.py:208: Generated: /tmp/tmp8qslciqc/lib.so
+Compiling with arguments:
+  --config          LlamaConfig(hidden_size=576, intermediate_size=1536, num_attention_heads=9, num_hidden_layers=30, rms_norm_eps=1e-05, vocab_size=49152, tie_word_embeddings=True, position_embedding_base=100000, rope_scaling=None, context_window_size=8192, prefill_chunk_size=8192, num_key_value_heads=3, head_dim=64, tensor_parallel_shards=1, pipeline_parallel_stages=1, max_batch_size=128, disaggregation=False, kwargs={})
+  --quantization    GroupQuantize(name='q4f16_1', kind='group-quant', group_size=32, quantize_dtype='int4', storage_dtype='uint32', model_dtype='float16', linear_weight_layout='NK', quantize_embedding=True, quantize_final_fc=True, num_elem_per_storage=8, num_storage_per_group=4, max_int_value=7, tensor_parallel_shards=0)
+  --model-type      llama
+  --target          {'kind': 'llvm', 'tag': '', 'keys': ['arm_cpu', 'cpu'], 'host': {'kind': 'llvm', 'tag': '', 'keys': ['arm_cpu', 'cpu'], 'mcpu': 'cortex-a76', 'mtriple': 'aarch64-unknown-linux-gnu'}, 'mcpu': 'cortex-a76', 'mtriple': 'aarch64-unknown-linux-gnu'}
+  --opt             flashinfer=0;cublas_gemm=0;faster_transformer=0;cudagraph=0;cutlass=0;ipc_allreduce_strategy=NONE
+  --system-lib-prefix ""
+  --output          /tmp/tmp8qslciqc/lib.so
+  --overrides       context_window_size=None;sliding_window_size=None;prefill_chunk_size=None;attention_sink_size=None;max_batch_size=None;tensor_parallel_shards=None;pipeline_parallel_stages=None;disaggregation=None
+[22:23:31] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[22:23:31] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[22:23:31] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 606009, prefill chunk size will be set to 8192. 
+[22:23:31] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[22:23:31] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 555.902 MB (Parameters: 72.208 MB. KVCache: 252.635 MB. Temporary buffer: 231.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.600s prefill, 26.199s decode
+  Run 2/3 - Latency: 0.639s prefill, 26.140s decode
+  Run 3/3 - Latency: 0.638s prefill, 26.473s decode
+
+[20/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | INT4 | 16-bit | Prefill:256 | Decode:512
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q4f16_1-MLC
+[22:25:45] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[22:25:45] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[22:25:45] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 606009, prefill chunk size will be set to 8192. 
+[22:25:45] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[22:25:45] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 555.902 MB (Parameters: 72.208 MB. KVCache: 252.635 MB. Temporary buffer: 231.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.596s prefill, 113.225s decode
+  Run 2/3 - Latency: 0.638s prefill, 119.104s decode
+  Run 3/3 - Latency: 0.644s prefill, 121.181s decode
+
+[21/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | INT4 | 16-bit | Prefill:1024 | Decode:128
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q4f16_1-MLC
+[22:32:16] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[22:32:16] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[22:32:16] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 606009, prefill chunk size will be set to 8192. 
+[22:32:16] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[22:32:16] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 555.902 MB (Parameters: 72.208 MB. KVCache: 252.635 MB. Temporary buffer: 231.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.634s prefill, 29.946s decode
+  Run 2/3 - Latency: 0.672s prefill, 30.527s decode
+  Run 3/3 - Latency: 0.673s prefill, 30.890s decode
+
+[22/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | INT4 | 16-bit | Prefill:1024 | Decode:512
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q4f16_1-MLC
+[22:36:07] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[22:36:07] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[22:36:07] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 606009, prefill chunk size will be set to 8192. 
+[22:36:07] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[22:36:07] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 555.902 MB (Parameters: 72.208 MB. KVCache: 252.635 MB. Temporary buffer: 231.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.554s prefill, 5.576s decode
+  Run 2/3 - Latency: 0.642s prefill, 128.767s decode
+  Run 3/3 - Latency: 0.676s prefill, 135.245s decode
+
+[23/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | INT4 | 16-bit | Prefill:2048 | Decode:128
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q4f16_1-MLC
+[22:42:37] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[22:42:37] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[22:42:37] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 606009, prefill chunk size will be set to 8192. 
+[22:42:37] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[22:42:37] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 555.902 MB (Parameters: 72.208 MB. KVCache: 252.635 MB. Temporary buffer: 231.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.672s prefill, 1.080s decode
+  Run 2/3 - Latency: 0.626s prefill, 34.944s decode
+  Run 3/3 - Latency: 0.716s prefill, 35.206s decode
+
+[24/48] Running experiment...
+
+============================================================
+Experiment: SmolLM2-135M | INT4 | 16-bit | Prefill:2048 | Decode:512
+============================================================
+Loading model: HF://mlc-ai/SmolLM2-135M-Instruct-q4f16_1-MLC
+[22:48:14] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[22:48:14] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[22:48:14] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 606009, prefill chunk size will be set to 8192. 
+[22:48:14] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[22:48:14] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 555.902 MB (Parameters: 72.208 MB. KVCache: 252.635 MB. Temporary buffer: 231.059 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.724s prefill, 154.479s decode
+  Run 2/3 - Latency: 0.714s prefill, 158.098s decode
+  Run 3/3 - Latency: 0.722s prefill, 159.053s decode
+
+[25/48] Running experiment...
+
+============================================================
+Experiment: Qwen2-0.5B-Instruct | None (Full Precision) | 32-bit | Prefill:256 | Decode:128
+============================================================
+Loading model: HF://mlc-ai/Qwen2-0.5B-Instruct-q0f32-MLC
+0it [00:00, ?it/s]
+100%|██████████| 25/25 [00:59<00:00,  2.39s/it]
+[2025-11-18 23:03:22] INFO auto_config.py:70: Found model configuration: /home/pi/test_env/mlc-llm/model_weights/hf/mlc-ai/Qwen2-0.5B-Instruct-q0f32-MLC/mlc-chat-config.json
+[2025-11-18 23:03:22] INFO auto_target.py:91: Detecting target device: cpu:0
+[2025-11-18 23:03:22] INFO auto_target.py:93: Found target: {'kind': 'llvm', 'tag': '', 'keys': ['arm_cpu', 'cpu'], 'mcpu': 'cortex-a76', 'mtriple': 'aarch64-unknown-linux-gnu'}
+[2025-11-18 23:03:22] INFO auto_target.py:110: Found host LLVM triple: aarch64-unknown-linux-gnu
+[2025-11-18 23:03:22] INFO auto_target.py:111: Found host LLVM CPU: cortex-a76
+[2025-11-18 23:03:22] INFO auto_config.py:154: Found model type: qwen2. Use `--model-type` to override.
+[2025-11-18 23:03:22] INFO compile.py:140: Creating model from: QWen2Config(hidden_act='silu', hidden_size=896, intermediate_size=4864, num_attention_heads=14, num_hidden_layers=24, num_key_value_heads=2, rms_norm_eps=1e-06, rope_theta=1000000.0, vocab_size=151936, tie_word_embeddings=True, context_window_size=32768, prefill_chunk_size=2048, tensor_parallel_shards=1, head_dim=64, dtype='float32', max_batch_size=80, kwargs={})
+[2025-11-18 23:03:22] INFO compile.py:158: Exporting the model to TVM compiler
+[2025-11-18 23:03:23] INFO compile.py:164: Running optimizations using TVM
+[2025-11-18 23:03:23] INFO compile.py:186: Registering metadata: {'model_type': 'qwen2', 'quantization': 'q0f32', 'context_window_size': 32768, 'sliding_window_size': -1, 'attention_sink_size': -1, 'prefill_chunk_size': 2048, 'tensor_parallel_shards': 1, 'pipeline_parallel_stages': 1, 'disaggregation': False, 'kv_state_kind': 'kv_cache', 'max_batch_size': 80}
+[2025-11-18 23:03:24] INFO pipeline.py:57: Running TVM Relax graph-level optimizations
+[2025-11-18 23:03:25] INFO pipeline.py:57: Lowering to TVM TIR kernels
+[23:03:25] /home/pi/test_env/tvm/include/tvm/topi/transform.h:1232: Warning: Fast mode segfaults when there are out-of-bounds indices. Make sure input indices are in bound
+[23:03:25] /home/pi/test_env/tvm/include/tvm/topi/transform.h:1232: Warning: Fast mode segfaults when there are out-of-bounds indices. Make sure input indices are in bound
+[2025-11-18 23:03:28] INFO pipeline.py:57: Running TVM TIR-level optimizations
+[2025-11-18 23:03:31] INFO pipeline.py:57: Running TVM Dlight low-level optimizations
+[2025-11-18 23:03:34] INFO pipeline.py:57: Lowering to VM bytecode
+[2025-11-18 23:03:35] INFO estimate_memory_usage.py:58: [Memory usage] Function `alloc_embedding_tensor`: 7.00 MB
+[2025-11-18 23:03:35] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_decode`: 52.30 MB
+[2025-11-18 23:03:35] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_prefill`: 198.64 MB
+[2025-11-18 23:03:35] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_verify`: 1339.00 MB
+[2025-11-18 23:03:35] INFO estimate_memory_usage.py:58: [Memory usage] Function `create_tir_paged_kv_cache`: 0.00 MB
+[2025-11-18 23:03:35] INFO estimate_memory_usage.py:58: [Memory usage] Function `decode`: 0.65 MB
+[2025-11-18 23:03:35] INFO estimate_memory_usage.py:58: [Memory usage] Function `embed`: 7.00 MB
+[2025-11-18 23:03:35] INFO estimate_memory_usage.py:58: [Memory usage] Function `prefill`: 152.58 MB
+[2025-11-18 23:03:35] INFO estimate_memory_usage.py:58: [Memory usage] Function `softmax_with_temperature`: 0.00 MB
+[2025-11-18 23:03:35] INFO pipeline.py:57: Compiling external modules
+[2025-11-18 23:03:35] INFO pipeline.py:57: Compilation complete! Exporting to disk
+[2025-11-18 23:20:51] INFO model_metadata.py:94: Total memory usage without KV cache: 3223.59 MB (Parameters: 1884.59 MB. Temporary buffer: 1339.00 MB)
+[2025-11-18 23:20:51] INFO model_metadata.py:128: KV cache size: 0.02 MB per token in the context window
+[2025-11-18 23:20:51] INFO model_metadata.py:133: Total memory usage with a 4K KV cache: 3319.59 MB
+[2025-11-18 23:20:51] INFO model_metadata.py:139: To reduce memory usage, tweak `prefill_chunk_size`, `context_window_size` and `sliding_window_size`
+[2025-11-18 23:20:51] INFO compile.py:208: Generated: /tmp/tmpsdpexej0/lib.so
+Compiling with arguments:
+  --config          QWen2Config(hidden_act='silu', hidden_size=896, intermediate_size=4864, num_attention_heads=14, num_hidden_layers=24, num_key_value_heads=2, rms_norm_eps=1e-06, rope_theta=1000000.0, vocab_size=151936, tie_word_embeddings=True, context_window_size=32768, prefill_chunk_size=2048, tensor_parallel_shards=1, head_dim=64, dtype='float32', max_batch_size=80, kwargs={})
+  --quantization    NoQuantize(name='q0f32', kind='no-quant', model_dtype='float32')
+  --model-type      qwen2
+  --target          {'kind': 'llvm', 'tag': '', 'keys': ['arm_cpu', 'cpu'], 'host': {'kind': 'llvm', 'tag': '', 'keys': ['arm_cpu', 'cpu'], 'mcpu': 'cortex-a76', 'mtriple': 'aarch64-unknown-linux-gnu'}, 'mcpu': 'cortex-a76', 'mtriple': 'aarch64-unknown-linux-gnu'}
+  --opt             flashinfer=0;cublas_gemm=0;faster_transformer=0;cudagraph=0;cutlass=0;ipc_allreduce_strategy=NONE
+  --system-lib-prefix ""
+  --output          /tmp/tmpsdpexej0/lib.so
+  --overrides       context_window_size=None;sliding_window_size=None;prefill_chunk_size=None;attention_sink_size=None;max_batch_size=None;tensor_parallel_shards=None;pipeline_parallel_stages=None;disaggregation=None
+[23:20:52] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 2048. 
+[23:20:52] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 32768, prefill chunk size will be set to 2048. 
+[23:20:52] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 80, max KV cache token capacity will be set to 765639, prefill chunk size will be set to 2048. 
+[23:20:52] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 2048.
+[23:20:52] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 4731.191 MB (Parameters: 1884.585 MB. KVCache: 152.245 MB. Temporary buffer: 2694.361 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.611s prefill, 54.177s decode
+  Run 2/3 - Latency: 0.611s prefill, 56.775s decode
+  Run 3/3 - Latency: 0.615s prefill, 57.807s decode
+
+[26/48] Running experiment...
+
+============================================================
+Experiment: Qwen2-0.5B-Instruct | None (Full Precision) | 32-bit | Prefill:256 | Decode:512
+============================================================
+Loading model: HF://mlc-ai/Qwen2-0.5B-Instruct-q0f32-MLC
+[23:26:02] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 2048. 
+[23:26:02] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 32768, prefill chunk size will be set to 2048. 
+[23:26:02] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 80, max KV cache token capacity will be set to 765639, prefill chunk size will be set to 2048. 
+[23:26:02] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 2048.
+[23:26:02] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 4731.191 MB (Parameters: 1884.585 MB. KVCache: 152.245 MB. Temporary buffer: 2694.361 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.649s prefill, 138.040s decode
+  Run 2/3 - Latency: 0.641s prefill, 167.475s decode
+  Run 3/3 - Latency: 0.680s prefill, 192.947s decode
+
+[27/48] Running experiment...
+
+============================================================
+Experiment: Qwen2-0.5B-Instruct | None (Full Precision) | 32-bit | Prefill:1024 | Decode:128
+============================================================
+Loading model: HF://mlc-ai/Qwen2-0.5B-Instruct-q0f32-MLC
+[23:38:40] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 2048. 
+[23:38:40] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 32768, prefill chunk size will be set to 2048. 
+[23:38:40] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 80, max KV cache token capacity will be set to 765639, prefill chunk size will be set to 2048. 
+[23:38:40] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 2048.
+[23:38:40] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 4731.191 MB (Parameters: 1884.585 MB. KVCache: 152.245 MB. Temporary buffer: 2694.361 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.661s prefill, 61.140s decode
+  Run 2/3 - Latency: 0.657s prefill, 63.308s decode
+  Run 3/3 - Latency: 0.653s prefill, 64.789s decode
+
+[28/48] Running experiment...
+
+============================================================
+Experiment: Qwen2-0.5B-Instruct | None (Full Precision) | 32-bit | Prefill:1024 | Decode:512
+============================================================
+Loading model: HF://mlc-ai/Qwen2-0.5B-Instruct-q0f32-MLC
+[23:48:51] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 2048. 
+[23:48:51] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 32768, prefill chunk size will be set to 2048. 
+[23:48:51] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 80, max KV cache token capacity will be set to 765639, prefill chunk size will be set to 2048. 
+[23:48:51] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 2048.
+[23:48:51] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 4731.191 MB (Parameters: 1884.585 MB. KVCache: 152.245 MB. Temporary buffer: 2694.361 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.659s prefill, 209.958s decode
+  Run 2/3 - Latency: 0.717s prefill, 216.250s decode
+  Run 3/3 - Latency: 0.655s prefill, 118.807s decode
+
+[29/48] Running experiment...
+
+============================================================
+Experiment: Qwen2-0.5B-Instruct | None (Full Precision) | 32-bit | Prefill:2048 | Decode:128
+============================================================
+Loading model: HF://mlc-ai/Qwen2-0.5B-Instruct-q0f32-MLC
+[00:06:44] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 2048. 
+[00:06:44] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 32768, prefill chunk size will be set to 2048. 
+[00:06:44] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 80, max KV cache token capacity will be set to 765639, prefill chunk size will be set to 2048. 
+[00:06:44] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 2048.
+[00:06:44] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 4731.191 MB (Parameters: 1884.585 MB. KVCache: 152.245 MB. Temporary buffer: 2694.361 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.716s prefill, 68.444s decode
+  Run 2/3 - Latency: 0.715s prefill, 71.307s decode
+  Run 3/3 - Latency: 0.714s prefill, 55.329s decode
+
+[30/48] Running experiment...
+
+============================================================
+Experiment: Qwen2-0.5B-Instruct | None (Full Precision) | 32-bit | Prefill:2048 | Decode:512
+============================================================
+Loading model: HF://mlc-ai/Qwen2-0.5B-Instruct-q0f32-MLC
+[00:23:10] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 2048. 
+[00:23:10] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 32768, prefill chunk size will be set to 2048. 
+[00:23:10] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 80, max KV cache token capacity will be set to 765639, prefill chunk size will be set to 2048. 
+[00:23:10] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 2048.
+[00:23:10] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 4731.191 MB (Parameters: 1884.585 MB. KVCache: 152.245 MB. Temporary buffer: 2694.361 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.710s prefill, 242.441s decode
+  Run 2/3 - Latency: 0.717s prefill, 173.467s decode
+  Run 3/3 - Latency: 0.710s prefill, 223.379s decode
+
+[31/48] Running experiment...
+
+============================================================
+Experiment: Qwen2-0.5B-Instruct | INT4 | 32-bit | Prefill:256 | Decode:128
+============================================================
+Loading model: HF://mlc-ai/Qwen2-0.5B-Instruct-q4f32_1-MLC
+0it [00:00, ?it/s]
+100%|██████████| 8/8 [00:18<00:00,  2.32s/it]
+[2025-11-19 00:48:23] INFO auto_config.py:70: Found model configuration: /home/pi/test_env/mlc-llm/model_weights/hf/mlc-ai/Qwen2-0.5B-Instruct-q4f32_1-MLC/mlc-chat-config.json
+[2025-11-19 00:48:23] INFO auto_target.py:91: Detecting target device: cpu:0
+[2025-11-19 00:48:23] INFO auto_target.py:93: Found target: {'kind': 'llvm', 'tag': '', 'keys': ['arm_cpu', 'cpu'], 'mcpu': 'cortex-a76', 'mtriple': 'aarch64-unknown-linux-gnu'}
+[2025-11-19 00:48:23] INFO auto_target.py:110: Found host LLVM triple: aarch64-unknown-linux-gnu
+[2025-11-19 00:48:23] INFO auto_target.py:111: Found host LLVM CPU: cortex-a76
+[2025-11-19 00:48:23] INFO auto_config.py:154: Found model type: qwen2. Use `--model-type` to override.
+[2025-11-19 00:48:23] INFO compile.py:140: Creating model from: QWen2Config(hidden_act='silu', hidden_size=896, intermediate_size=4864, num_attention_heads=14, num_hidden_layers=24, num_key_value_heads=2, rms_norm_eps=1e-06, rope_theta=1000000.0, vocab_size=151936, tie_word_embeddings=True, context_window_size=32768, prefill_chunk_size=2048, tensor_parallel_shards=1, head_dim=64, dtype='float32', max_batch_size=80, kwargs={})
+[2025-11-19 00:48:23] INFO compile.py:158: Exporting the model to TVM compiler
+[2025-11-19 00:48:24] INFO compile.py:164: Running optimizations using TVM
+[2025-11-19 00:48:24] INFO compile.py:186: Registering metadata: {'model_type': 'qwen2', 'quantization': 'q4f32_1', 'context_window_size': 32768, 'sliding_window_size': -1, 'attention_sink_size': -1, 'prefill_chunk_size': 2048, 'tensor_parallel_shards': 1, 'pipeline_parallel_stages': 1, 'disaggregation': False, 'kv_state_kind': 'kv_cache', 'max_batch_size': 80}
+[2025-11-19 00:48:26] INFO pipeline.py:57: Running TVM Relax graph-level optimizations
+[2025-11-19 00:48:27] INFO pipeline.py:57: Lowering to TVM TIR kernels
+[00:48:27] /home/pi/test_env/tvm/include/tvm/topi/transform.h:1232: Warning: Fast mode segfaults when there are out-of-bounds indices. Make sure input indices are in bound
+[00:48:28] /home/pi/test_env/tvm/include/tvm/topi/transform.h:1232: Warning: Fast mode segfaults when there are out-of-bounds indices. Make sure input indices are in bound
+[2025-11-19 00:48:32] INFO pipeline.py:57: Running TVM TIR-level optimizations
+[2025-11-19 00:48:38] INFO pipeline.py:57: Running TVM Dlight low-level optimizations
+[2025-11-19 00:48:42] INFO pipeline.py:57: Lowering to VM bytecode
+[2025-11-19 00:48:43] INFO estimate_memory_usage.py:58: [Memory usage] Function `alloc_embedding_tensor`: 7.00 MB
+[2025-11-19 00:48:43] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_decode`: 52.30 MB
+[2025-11-19 00:48:43] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_prefill`: 198.64 MB
+[2025-11-19 00:48:43] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_verify`: 1339.00 MB
+[2025-11-19 00:48:43] INFO estimate_memory_usage.py:58: [Memory usage] Function `create_tir_paged_kv_cache`: 0.00 MB
+[2025-11-19 00:48:43] INFO estimate_memory_usage.py:58: [Memory usage] Function `decode`: 0.65 MB
+[2025-11-19 00:48:43] INFO estimate_memory_usage.py:58: [Memory usage] Function `embed`: 7.00 MB
+[2025-11-19 00:48:43] INFO estimate_memory_usage.py:58: [Memory usage] Function `prefill`: 152.58 MB
+[2025-11-19 00:48:43] INFO estimate_memory_usage.py:58: [Memory usage] Function `softmax_with_temperature`: 0.00 MB
+[2025-11-19 00:48:43] INFO pipeline.py:57: Compiling external modules
+[2025-11-19 00:48:43] INFO pipeline.py:57: Compilation complete! Exporting to disk
+[2025-11-19 00:52:02] INFO model_metadata.py:94: Total memory usage without KV cache: 1633.70 MB (Parameters: 294.70 MB. Temporary buffer: 1339.00 MB)
+[2025-11-19 00:52:02] INFO model_metadata.py:128: KV cache size: 0.02 MB per token in the context window
+[2025-11-19 00:52:02] INFO model_metadata.py:133: Total memory usage with a 4K KV cache: 1729.70 MB
+[2025-11-19 00:52:02] INFO model_metadata.py:139: To reduce memory usage, tweak `prefill_chunk_size`, `context_window_size` and `sliding_window_size`
+[2025-11-19 00:52:02] INFO compile.py:208: Generated: /tmp/tmpc9lh30_5/lib.so
+Compiling with arguments:
+  --config          QWen2Config(hidden_act='silu', hidden_size=896, intermediate_size=4864, num_attention_heads=14, num_hidden_layers=24, num_key_value_heads=2, rms_norm_eps=1e-06, rope_theta=1000000.0, vocab_size=151936, tie_word_embeddings=True, context_window_size=32768, prefill_chunk_size=2048, tensor_parallel_shards=1, head_dim=64, dtype='float32', max_batch_size=80, kwargs={})
+  --quantization    GroupQuantize(name='q4f32_1', kind='group-quant', group_size=32, quantize_dtype='int4', storage_dtype='uint32', model_dtype='float32', linear_weight_layout='NK', quantize_embedding=True, quantize_final_fc=True, num_elem_per_storage=8, num_storage_per_group=4, max_int_value=7, tensor_parallel_shards=0)
+  --model-type      qwen2
+  --target          {'kind': 'llvm', 'tag': '', 'keys': ['arm_cpu', 'cpu'], 'host': {'kind': 'llvm', 'tag': '', 'keys': ['arm_cpu', 'cpu'], 'mcpu': 'cortex-a76', 'mtriple': 'aarch64-unknown-linux-gnu'}, 'mcpu': 'cortex-a76', 'mtriple': 'aarch64-unknown-linux-gnu'}
+  --opt             flashinfer=0;cublas_gemm=0;faster_transformer=0;cudagraph=0;cutlass=0;ipc_allreduce_strategy=NONE
+  --system-lib-prefix ""
+  --output          /tmp/tmpc9lh30_5/lib.so
+  --overrides       context_window_size=None;sliding_window_size=None;prefill_chunk_size=None;attention_sink_size=None;max_batch_size=None;tensor_parallel_shards=None;pipeline_parallel_stages=None;disaggregation=None
+[00:52:04] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 2048. 
+[00:52:04] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 32768, prefill chunk size will be set to 2048. 
+[00:52:04] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 80, max KV cache token capacity will be set to 901295, prefill chunk size will be set to 2048. 
+[00:52:04] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 2048.
+[00:52:04] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 3141.302 MB (Parameters: 294.697 MB. KVCache: 152.245 MB. Temporary buffer: 2694.361 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 1.927s prefill, 76.237s decode
+  Run 2/3 - Latency: 1.920s prefill, 78.173s decode
+  Run 3/3 - Latency: 1.919s prefill, 79.251s decode
+
+[32/48] Running experiment...
+
+============================================================
+Experiment: Qwen2-0.5B-Instruct | INT4 | 32-bit | Prefill:256 | Decode:512
+============================================================
+Loading model: HF://mlc-ai/Qwen2-0.5B-Instruct-q4f32_1-MLC
+[00:58:46] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 2048. 
+[00:58:46] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 32768, prefill chunk size will be set to 2048. 
+[00:58:46] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 80, max KV cache token capacity will be set to 901295, prefill chunk size will be set to 2048. 
+[00:58:46] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 2048.
+[00:58:46] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 3141.302 MB (Parameters: 294.697 MB. KVCache: 152.245 MB. Temporary buffer: 2694.361 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 1.917s prefill, 200.002s decode
+  Run 2/3 - Latency: 1.916s prefill, 333.703s decode
+  Run 3/3 - Latency: 1.917s prefill, 89.239s decode
+
+[33/48] Running experiment...
+
+============================================================
+Experiment: Qwen2-0.5B-Instruct | INT4 | 32-bit | Prefill:1024 | Decode:128
+============================================================
+Loading model: HF://mlc-ai/Qwen2-0.5B-Instruct-q4f32_1-MLC
+[01:12:11] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 2048. 
+[01:12:11] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 32768, prefill chunk size will be set to 2048. 
+[01:12:11] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 80, max KV cache token capacity will be set to 901295, prefill chunk size will be set to 2048. 
+[01:12:11] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 2048.
+[01:12:11] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 3141.302 MB (Parameters: 294.697 MB. KVCache: 152.245 MB. Temporary buffer: 2694.361 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 1.965s prefill, 80.035s decode
+  Run 2/3 - Latency: 1.970s prefill, 83.092s decode
+  Run 3/3 - Latency: 1.969s prefill, 84.316s decode
+
+[34/48] Running experiment...
+
+============================================================
+Experiment: Qwen2-0.5B-Instruct | INT4 | 32-bit | Prefill:1024 | Decode:512
+============================================================
+Loading model: HF://mlc-ai/Qwen2-0.5B-Instruct-q4f32_1-MLC
+[01:23:16] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 2048. 
+[01:23:16] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 32768, prefill chunk size will be set to 2048. 
+[01:23:16] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 80, max KV cache token capacity will be set to 901295, prefill chunk size will be set to 2048. 
+[01:23:16] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 2048.
+[01:23:16] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 3141.302 MB (Parameters: 294.697 MB. KVCache: 152.245 MB. Temporary buffer: 2694.361 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 1.965s prefill, 64.264s decode
+  Run 2/3 - Latency: 1.960s prefill, 341.195s decode
+  Run 3/3 - Latency: 1.962s prefill, 239.628s decode
+
+[35/48] Running experiment...
+
+============================================================
+Experiment: Qwen2-0.5B-Instruct | INT4 | 32-bit | Prefill:2048 | Decode:128
+============================================================
+Loading model: HF://mlc-ai/Qwen2-0.5B-Instruct-q4f32_1-MLC
+[01:41:15] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 2048. 
+[01:41:15] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 32768, prefill chunk size will be set to 2048. 
+[01:41:15] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 80, max KV cache token capacity will be set to 901295, prefill chunk size will be set to 2048. 
+[01:41:15] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 2048.
+[01:41:15] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 3141.302 MB (Parameters: 294.697 MB. KVCache: 152.245 MB. Temporary buffer: 2694.361 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 1.984s prefill, 86.211s decode
+  Run 2/3 - Latency: 2.020s prefill, 88.919s decode
+  Run 3/3 - Latency: 2.023s prefill, 68.046s decode
+
+[36/48] Running experiment...
+
+============================================================
+Experiment: Qwen2-0.5B-Instruct | INT4 | 32-bit | Prefill:2048 | Decode:512
+============================================================
+Loading model: HF://mlc-ai/Qwen2-0.5B-Instruct-q4f32_1-MLC
+[01:58:10] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 2048. 
+[01:58:10] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 32768, prefill chunk size will be set to 2048. 
+[01:58:10] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 80, max KV cache token capacity will be set to 901295, prefill chunk size will be set to 2048. 
+[01:58:10] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 2048.
+[01:58:10] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 3141.302 MB (Parameters: 294.697 MB. KVCache: 152.245 MB. Temporary buffer: 2694.361 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 1.960s prefill, 362.720s decode
+  Run 2/3 - Latency: 2.024s prefill, 374.492s decode
+  Run 3/3 - Latency: 2.033s prefill, 190.340s decode
+
+[37/48] Running experiment...
+
+============================================================
+Experiment: Qwen2-0.5B-Instruct | None (Full Precision) | 16-bit | Prefill:256 | Decode:128
+============================================================
+Loading model: HF://mlc-ai/Qwen2-0.5B-Instruct-q0f16-MLC
+0it [00:00, ?it/s]
+100%|██████████| 25/25 [00:57<00:00,  2.30s/it]
+[2025-11-19 02:27:33] INFO auto_config.py:70: Found model configuration: /home/pi/test_env/mlc-llm/model_weights/hf/mlc-ai/Qwen2-0.5B-Instruct-q0f16-MLC/mlc-chat-config.json
+[2025-11-19 02:27:33] INFO auto_target.py:91: Detecting target device: cpu:0
+[2025-11-19 02:27:33] INFO auto_target.py:93: Found target: {'kind': 'llvm', 'tag': '', 'keys': ['arm_cpu', 'cpu'], 'mcpu': 'cortex-a76', 'mtriple': 'aarch64-unknown-linux-gnu'}
+[2025-11-19 02:27:33] INFO auto_target.py:110: Found host LLVM triple: aarch64-unknown-linux-gnu
+[2025-11-19 02:27:33] INFO auto_target.py:111: Found host LLVM CPU: cortex-a76
+[2025-11-19 02:27:33] INFO auto_config.py:154: Found model type: qwen2. Use `--model-type` to override.
+[2025-11-19 02:27:33] INFO compile.py:140: Creating model from: QWen2Config(hidden_act='silu', hidden_size=896, intermediate_size=4864, num_attention_heads=14, num_hidden_layers=24, num_key_value_heads=2, rms_norm_eps=1e-06, rope_theta=1000000.0, vocab_size=151936, tie_word_embeddings=True, context_window_size=32768, prefill_chunk_size=2048, tensor_parallel_shards=1, head_dim=64, dtype='float32', max_batch_size=80, kwargs={})
+[2025-11-19 02:27:33] INFO compile.py:158: Exporting the model to TVM compiler
+[2025-11-19 02:27:33] INFO compile.py:164: Running optimizations using TVM
+[2025-11-19 02:27:33] INFO compile.py:186: Registering metadata: {'model_type': 'qwen2', 'quantization': 'q0f16', 'context_window_size': 32768, 'sliding_window_size': -1, 'attention_sink_size': -1, 'prefill_chunk_size': 2048, 'tensor_parallel_shards': 1, 'pipeline_parallel_stages': 1, 'disaggregation': False, 'kv_state_kind': 'kv_cache', 'max_batch_size': 80}
+[2025-11-19 02:27:34] INFO pipeline.py:57: Running TVM Relax graph-level optimizations
+[2025-11-19 02:27:35] INFO pipeline.py:57: Lowering to TVM TIR kernels
+[02:27:35] /home/pi/test_env/tvm/include/tvm/topi/transform.h:1232: Warning: Fast mode segfaults when there are out-of-bounds indices. Make sure input indices are in bound
+[02:27:36] /home/pi/test_env/tvm/include/tvm/topi/transform.h:1232: Warning: Fast mode segfaults when there are out-of-bounds indices. Make sure input indices are in bound
+[2025-11-19 02:27:39] INFO pipeline.py:57: Running TVM TIR-level optimizations
+[2025-11-19 02:27:41] INFO pipeline.py:57: Running TVM Dlight low-level optimizations
+[2025-11-19 02:27:44] INFO pipeline.py:57: Lowering to VM bytecode
+[2025-11-19 02:27:45] INFO estimate_memory_usage.py:58: [Memory usage] Function `alloc_embedding_tensor`: 3.50 MB
+[2025-11-19 02:27:45] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_decode`: 49.34 MB
+[2025-11-19 02:27:45] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_prefill`: 122.50 MB
+[2025-11-19 02:27:45] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_verify`: 1263.00 MB
+[2025-11-19 02:27:45] INFO estimate_memory_usage.py:58: [Memory usage] Function `create_tir_paged_kv_cache`: 0.00 MB
+[2025-11-19 02:27:45] INFO estimate_memory_usage.py:58: [Memory usage] Function `decode`: 0.62 MB
+[2025-11-19 02:27:45] INFO estimate_memory_usage.py:58: [Memory usage] Function `embed`: 3.50 MB
+[2025-11-19 02:27:45] INFO estimate_memory_usage.py:58: [Memory usage] Function `prefill`: 76.58 MB
+[2025-11-19 02:27:45] INFO estimate_memory_usage.py:58: [Memory usage] Function `softmax_with_temperature`: 0.00 MB
+[2025-11-19 02:27:45] INFO pipeline.py:57: Compiling external modules
+[2025-11-19 02:27:45] INFO pipeline.py:57: Compilation complete! Exporting to disk
+[2025-11-19 02:43:27] INFO model_metadata.py:94: Total memory usage without KV cache: 2205.29 MB (Parameters: 942.29 MB. Temporary buffer: 1263.00 MB)
+[2025-11-19 02:43:27] INFO model_metadata.py:128: KV cache size: 0.01 MB per token in the context window
+[2025-11-19 02:43:27] INFO model_metadata.py:133: Total memory usage with a 4K KV cache: 2253.29 MB
+[2025-11-19 02:43:27] INFO model_metadata.py:139: To reduce memory usage, tweak `prefill_chunk_size`, `context_window_size` and `sliding_window_size`
+[2025-11-19 02:43:27] INFO compile.py:208: Generated: /tmp/tmp_7xy8i4z/lib.so
+Compiling with arguments:
+  --config          QWen2Config(hidden_act='silu', hidden_size=896, intermediate_size=4864, num_attention_heads=14, num_hidden_layers=24, num_key_value_heads=2, rms_norm_eps=1e-06, rope_theta=1000000.0, vocab_size=151936, tie_word_embeddings=True, context_window_size=32768, prefill_chunk_size=2048, tensor_parallel_shards=1, head_dim=64, dtype='float32', max_batch_size=80, kwargs={})
+  --quantization    NoQuantize(name='q0f16', kind='no-quant', model_dtype='float16')
+  --model-type      qwen2
+  --target          {'kind': 'llvm', 'tag': '', 'keys': ['arm_cpu', 'cpu'], 'host': {'kind': 'llvm', 'tag': '', 'keys': ['arm_cpu', 'cpu'], 'mcpu': 'cortex-a76', 'mtriple': 'aarch64-unknown-linux-gnu'}, 'mcpu': 'cortex-a76', 'mtriple': 'aarch64-unknown-linux-gnu'}
+  --opt             flashinfer=0;cublas_gemm=0;faster_transformer=0;cudagraph=0;cutlass=0;ipc_allreduce_strategy=NONE
+  --system-lib-prefix ""
+  --output          /tmp/tmp_7xy8i4z/lib.so
+  --overrides       context_window_size=None;sliding_window_size=None;prefill_chunk_size=None;attention_sink_size=None;max_batch_size=None;tensor_parallel_shards=None;pipeline_parallel_stages=None;disaggregation=None
+[02:43:29] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 2048. 
+[02:43:29] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 32768, prefill chunk size will be set to 2048. 
+[02:43:29] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 80, max KV cache token capacity will be set to 859009, prefill chunk size will be set to 2048. 
+[02:43:29] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 2048.
+[02:43:29] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 3636.898 MB (Parameters: 942.293 MB. KVCache: 152.245 MB. Temporary buffer: 2542.361 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.574s prefill, 36.242s decode
+  Run 2/3 - Latency: 0.573s prefill, 37.900s decode
+  Run 3/3 - Latency: 0.572s prefill, 39.303s decode
+
+[38/48] Running experiment...
+
+============================================================
+Experiment: Qwen2-0.5B-Instruct | None (Full Precision) | 16-bit | Prefill:256 | Decode:512
+============================================================
+Loading model: HF://mlc-ai/Qwen2-0.5B-Instruct-q0f16-MLC
+[02:47:19] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 2048. 
+[02:47:19] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 32768, prefill chunk size will be set to 2048. 
+[02:47:19] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 80, max KV cache token capacity will be set to 859009, prefill chunk size will be set to 2048. 
+[02:47:19] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 2048.
+[02:47:19] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 3636.898 MB (Parameters: 942.293 MB. KVCache: 152.245 MB. Temporary buffer: 2542.361 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.580s prefill, 102.231s decode
+  Run 2/3 - Latency: 0.574s prefill, 80.540s decode
+  Run 3/3 - Latency: 0.573s prefill, 117.088s decode
+
+[39/48] Running experiment...
+
+============================================================
+Experiment: Qwen2-0.5B-Instruct | None (Full Precision) | 16-bit | Prefill:1024 | Decode:128
+============================================================
+Loading model: HF://mlc-ai/Qwen2-0.5B-Instruct-q0f16-MLC
+[02:55:32] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 2048. 
+[02:55:32] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 32768, prefill chunk size will be set to 2048. 
+[02:55:32] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 80, max KV cache token capacity will be set to 859009, prefill chunk size will be set to 2048. 
+[02:55:32] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 2048.
+[02:55:32] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 3636.898 MB (Parameters: 942.293 MB. KVCache: 152.245 MB. Temporary buffer: 2542.361 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.612s prefill, 41.708s decode
+  Run 2/3 - Latency: 0.617s prefill, 43.872s decode
+  Run 3/3 - Latency: 0.615s prefill, 45.047s decode
+
+[40/48] Running experiment...
+
+============================================================
+Experiment: Qwen2-0.5B-Instruct | None (Full Precision) | 16-bit | Prefill:1024 | Decode:512
+============================================================
+Loading model: HF://mlc-ai/Qwen2-0.5B-Instruct-q0f16-MLC
+[03:03:53] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 2048. 
+[03:03:53] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 32768, prefill chunk size will be set to 2048. 
+[03:03:53] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 80, max KV cache token capacity will be set to 859009, prefill chunk size will be set to 2048. 
+[03:03:53] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 2048.
+[03:03:53] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 3636.898 MB (Parameters: 942.293 MB. KVCache: 152.245 MB. Temporary buffer: 2542.361 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.612s prefill, 127.919s decode
+  Run 2/3 - Latency: 0.618s prefill, 192.685s decode
+  Run 3/3 - Latency: 0.617s prefill, 117.592s decode
+
+[41/48] Running experiment...
+
+============================================================
+Experiment: Qwen2-0.5B-Instruct | None (Full Precision) | 16-bit | Prefill:2048 | Decode:128
+============================================================
+Loading model: HF://mlc-ai/Qwen2-0.5B-Instruct-q0f16-MLC
+[03:17:27] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 2048. 
+[03:17:27] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 32768, prefill chunk size will be set to 2048. 
+[03:17:27] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 80, max KV cache token capacity will be set to 859009, prefill chunk size will be set to 2048. 
+[03:17:27] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 2048.
+[03:17:27] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 3636.898 MB (Parameters: 942.293 MB. KVCache: 152.245 MB. Temporary buffer: 2542.361 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.670s prefill, 47.681s decode
+  Run 2/3 - Latency: 0.665s prefill, 47.752s decode
+  Run 3/3 - Latency: 0.665s prefill, 50.910s decode
+
+[42/48] Running experiment...
+
+============================================================
+Experiment: Qwen2-0.5B-Instruct | None (Full Precision) | 16-bit | Prefill:2048 | Decode:512
+============================================================
+Loading model: HF://mlc-ai/Qwen2-0.5B-Instruct-q0f16-MLC
+[03:31:41] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 2048. 
+[03:31:41] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 32768, prefill chunk size will be set to 2048. 
+[03:31:41] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 80, max KV cache token capacity will be set to 859009, prefill chunk size will be set to 2048. 
+[03:31:41] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 2048.
+[03:31:41] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 3636.898 MB (Parameters: 942.293 MB. KVCache: 152.245 MB. Temporary buffer: 2542.361 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+  Warm-up 1/1...
+Measured runs: 3
+  Run 1/3 - Latency: 0.667s prefill, 33.330s decode
+  Run 2/3 - Latency: 0.669s prefill, 80.503s decode
+  Run 3/3 - Latency: 0.665s prefill, 55.039s decode
+
+[43/48] Running experiment...
+
+============================================================
+Experiment: Qwen2-0.5B-Instruct | INT4 | 16-bit | Prefill:256 | Decode:128
+============================================================
+Loading model: HF://mlc-ai/Qwen2-0.5B-Instruct-q4f16_1-MLC
+0it [00:00, ?it/s]
+100%|██████████| 8/8 [00:17<00:00,  2.15s/it]
+[2025-11-19 03:47:18] INFO auto_config.py:70: Found model configuration: /home/pi/test_env/mlc-llm/model_weights/hf/mlc-ai/Qwen2-0.5B-Instruct-q4f16_1-MLC/mlc-chat-config.json
+[2025-11-19 03:47:18] INFO auto_target.py:91: Detecting target device: cpu:0
+[2025-11-19 03:47:18] INFO auto_target.py:93: Found target: {'kind': 'llvm', 'tag': '', 'keys': ['arm_cpu', 'cpu'], 'mcpu': 'cortex-a76', 'mtriple': 'aarch64-unknown-linux-gnu'}
+[2025-11-19 03:47:18] INFO auto_target.py:110: Found host LLVM triple: aarch64-unknown-linux-gnu
+[2025-11-19 03:47:18] INFO auto_target.py:111: Found host LLVM CPU: cortex-a76
+[2025-11-19 03:47:18] INFO auto_config.py:154: Found model type: qwen2. Use `--model-type` to override.
+[2025-11-19 03:47:18] INFO compile.py:140: Creating model from: QWen2Config(hidden_act='silu', hidden_size=896, intermediate_size=4864, num_attention_heads=14, num_hidden_layers=24, num_key_value_heads=2, rms_norm_eps=1e-06, rope_theta=1000000.0, vocab_size=151936, tie_word_embeddings=True, context_window_size=32768, prefill_chunk_size=2048, tensor_parallel_shards=1, head_dim=64, dtype='float32', max_batch_size=80, kwargs={})
+[2025-11-19 03:47:18] INFO compile.py:158: Exporting the model to TVM compiler
+[2025-11-19 03:47:19] INFO compile.py:164: Running optimizations using TVM
+[2025-11-19 03:47:19] INFO compile.py:186: Registering metadata: {'model_type': 'qwen2', 'quantization': 'q4f16_1', 'context_window_size': 32768, 'sliding_window_size': -1, 'attention_sink_size': -1, 'prefill_chunk_size': 2048, 'tensor_parallel_shards': 1, 'pipeline_parallel_stages': 1, 'disaggregation': False, 'kv_state_kind': 'kv_cache', 'max_batch_size': 80}
+[2025-11-19 03:47:20] INFO pipeline.py:57: Running TVM Relax graph-level optimizations
+[2025-11-19 03:47:21] INFO pipeline.py:57: Lowering to TVM TIR kernels
+[03:47:22] /home/pi/test_env/tvm/include/tvm/topi/transform.h:1232: Warning: Fast mode segfaults when there are out-of-bounds indices. Make sure input indices are in bound
+[03:47:23] /home/pi/test_env/tvm/include/tvm/topi/transform.h:1232: Warning: Fast mode segfaults when there are out-of-bounds indices. Make sure input indices are in bound
+[2025-11-19 03:47:26] INFO pipeline.py:57: Running TVM TIR-level optimizations
+[2025-11-19 03:47:32] INFO pipeline.py:57: Running TVM Dlight low-level optimizations
+[2025-11-19 03:47:36] INFO pipeline.py:57: Lowering to VM bytecode
+[2025-11-19 03:47:36] INFO estimate_memory_usage.py:58: [Memory usage] Function `alloc_embedding_tensor`: 3.50 MB
+[2025-11-19 03:47:36] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_decode`: 49.34 MB
+[2025-11-19 03:47:36] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_prefill`: 122.50 MB
+[2025-11-19 03:47:36] INFO estimate_memory_usage.py:58: [Memory usage] Function `batch_verify`: 1263.00 MB
+[2025-11-19 03:47:36] INFO estimate_memory_usage.py:58: [Memory usage] Function `create_tir_paged_kv_cache`: 0.00 MB
+[2025-11-19 03:47:36] INFO estimate_memory_usage.py:58: [Memory usage] Function `decode`: 0.62 MB
+[2025-11-19 03:47:36] INFO estimate_memory_usage.py:58: [Memory usage] Function `embed`: 3.50 MB
+[2025-11-19 03:47:36] INFO estimate_memory_usage.py:58: [Memory usage] Function `prefill`: 76.58 MB
+[2025-11-19 03:47:36] INFO estimate_memory_usage.py:58: [Memory usage] Function `softmax_with_temperature`: 0.00 MB
+[2025-11-19 03:47:37] INFO pipeline.py:57: Compiling external modules
+[2025-11-19 03:47:37] INFO pipeline.py:57: Compilation complete! Exporting to disk
+[2025-11-19 03:50:53] INFO model_metadata.py:94: Total memory usage without KV cache: 1528.12 MB (Parameters: 265.12 MB. Temporary buffer: 1263.00 MB)
+[2025-11-19 03:50:53] INFO model_metadata.py:128: KV cache size: 0.01 MB per token in the context window
+[2025-11-19 03:50:53] INFO model_metadata.py:133: Total memory usage with a 4K KV cache: 1576.12 MB
+[2025-11-19 03:50:53] INFO model_metadata.py:139: To reduce memory usage, tweak `prefill_chunk_size`, `context_window_size` and `sliding_window_size`
+[2025-11-19 03:50:53] INFO compile.py:208: Generated: /tmp/tmpbz6v8c92/lib.so
+Compiling with arguments:
+  --config          QWen2Config(hidden_act='silu', hidden_size=896, intermediate_size=4864, num_attention_heads=14, num_hidden_layers=24, num_key_value_heads=2, rms_norm_eps=1e-06, rope_theta=1000000.0, vocab_size=151936, tie_word_embeddings=True, context_window_size=32768, prefill_chunk_size=2048, tensor_parallel_shards=1, head_dim=64, dtype='float32', max_batch_size=80, kwargs={})
+  --quantization    GroupQuantize(name='q4f16_1', kind='group-quant', group_size=32, quantize_dtype='int4', storage_dtype='uint32', model_dtype='float16', linear_weight_layout='NK', quantize_embedding=True, quantize_final_fc=True, num_elem_per_storage=8, num_storage_per_group=4, max_int_value=7, tensor_parallel_shards=0)
+  --model-type      qwen2
+  --target          {'kind': 'llvm', 'tag': '', 'keys': ['arm_cpu', 'cpu'], 'host': {'kind': 'llvm', 'tag': '', 'keys': ['arm_cpu', 'cpu'], 'mcpu': 'cortex-a76', 'mtriple': 'aarch64-unknown-linux-gnu'}, 'mcpu': 'cortex-a76', 'mtriple': 'aarch64-unknown-linux-gnu'}
+  --opt             flashinfer=0;cublas_gemm=0;faster_transformer=0;cudagraph=0;cutlass=0;ipc_allreduce_strategy=NONE
+  --system-lib-prefix ""
+  --output          /tmp/tmpbz6v8c92/lib.so
+  --overrides       context_window_size=None;sliding_window_size=None;prefill_chunk_size=None;attention_sink_size=None;max_batch_size=None;tensor_parallel_shards=None;pipeline_parallel_stages=None;disaggregation=None
+[03:50:54] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 2048. 
+[03:50:54] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 32768, prefill chunk size will be set to 2048. 
+[03:50:54] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 80, max KV cache token capacity will be set to 916788, prefill chunk size will be set to 2048. 
+[03:50:54] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 2048.
+[03:50:54] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 2959.723 MB (Parameters: 265.118 MB. KVCache: 152.245 MB. Temporary buffer: 2542.361 MB). The actual usage might be slightly larger than the estimated number.
+Model loaded successfully
+Warning: Using word-based token estimation
+Warm-up runs: 1
+!!!CUT OFF HERE!!!
