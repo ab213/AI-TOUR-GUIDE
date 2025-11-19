@@ -3,3 +3,4 @@ pynmea2
 pynmeagps==1.0.51
 numba
 pyttsx3
+tokenizers

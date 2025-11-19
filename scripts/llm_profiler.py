@@ -20,6 +20,7 @@ import psutil
 import matplotlib.pyplot as plt
 import pandas as pd
 from mlc_llm import MLCEngine
+from tokenizers import Tokenizer
 
 
 def log_print(*args, **kwargs):
@@ -37,6 +38,9 @@ class Metrics:
     prefill_latency: float
     decode_latency: float
     tokens_per_sec: float
+    prompt_tokens: int
+    completion_tokens: int
+    total_tokens: int
     memory_mb: float
     cpu_pct: float
     temp_c: float
@@ -113,13 +117,75 @@ class Profiler:
         self.model_path = model_path
         self.device = device
         self.engine: Optional[MLCEngine] = None
+        self.tokenizer: Optional[Tokenizer] = None
         
+    def _load_tokenizer(self) -> bool:
+        """Load tokenizer from model path. Returns True if successful."""
+        if not TOKENIZER_AVAILABLE:
+            return False
+        
+        try:
+            # Try to find tokenizer.json in the model path
+            # For HF:// paths, MLC downloads models to cache
+            # We need to find the actual model directory
+            
+            # If model_path is a local path
+            if not self.model_path.startswith("HF://"):
+                tokenizer_path = Path(self.model_path) / "tokenizer.json"
+                if tokenizer_path.exists():
+                    self.tokenizer = Tokenizer.from_file(str(tokenizer_path))
+                    return True
+            
+            # For HF:// paths, try to find in MLC cache
+            # MLC typically caches models in ~/.cache/mlc_llm or similar
+            import os
+            home = os.path.expanduser("~")
+            cache_dirs = [
+                Path(home) / ".cache" / "mlc_llm",
+                Path(home) / ".cache" / "mlc-llm",
+            ]
+            
+            # Extract model name from HF path
+            if self.model_path.startswith("HF://"):
+                model_name = self.model_path.replace("HF://", "").split("/")[-1]
+                for cache_dir in cache_dirs:
+                    if cache_dir.exists():
+                        # Search for tokenizer.json in subdirectories
+                        for tokenizer_file in cache_dir.rglob("tokenizer.json"):
+                            # Check if it's in a directory that matches our model
+                            if model_name.lower() in str(tokenizer_file.parent).lower():
+                                self.tokenizer = Tokenizer.from_file(str(tokenizer_file))
+                                return True
+            
+            return False
+        except Exception as e:
+            log_print(f"Warning: Failed to load tokenizer: {e}")
+            return False
+    
+    def count_tokens(self, text: str) -> int:
+        """Count tokens in text using tokenizer if available, else estimate."""
+        if self.tokenizer is not None:
+            try:
+                encoded = self.tokenizer.encode(text)
+                return len(encoded.ids)
+            except Exception as e:
+                log_print(f"Warning: Tokenizer encoding failed: {e}, using estimation")
+        
+        # Fallback to word-based estimation
+        return int(len(text.split()) * 0.75)
+    
     def initialize(self):
-        """Initialize the MLC engine"""
+        """Initialize the MLC engine and tokenizer"""
         if self.engine is None:
             log_print(f"Loading model: {self.model_path}")
             self.engine = MLCEngine(self.model_path, device=self.device)
             log_print("Model loaded successfully")
+            
+            # Try to load tokenizer
+            if self._load_tokenizer():
+                log_print("Tokenizer loaded successfully")
+            else:
+                log_print("Warning: Using word-based token estimation")
     
     def generate_with_metrics(
         self,
@@ -148,6 +214,20 @@ class Profiler:
         
         # Use streaming to measure prefill vs decode
         response_text = ""
+        prompt_tokens = 0
+        completion_tokens = 0
+        total_tokens = 0
+        
+        # Count prompt tokens using tokenizer
+        if self.tokenizer is not None:
+            try:
+                # Count tokens in the full message (including system prompt if present)
+                full_message = "\n".join([msg.get("content", "") for msg in messages])
+                prompt_tokens = self.count_tokens(full_message)
+            except Exception:
+                pass
+        
+        last_chunk = None
         for chunk in self.engine.chat.completions.create(
             messages=messages,
             model=self.model_path,
@@ -155,6 +235,7 @@ class Profiler:
             max_tokens=max_tokens,
             temperature=0.7
         ):
+            last_chunk = chunk  # Keep last chunk to check for usage stats
             if first_token_time is None:
                 first_token_time = time.perf_counter()
                 prefill_latency = first_token_time - prefill_start
@@ -167,6 +248,18 @@ class Profiler:
         
         decode_end = time.perf_counter()
         
+        # Check for usage statistics in the last chunk (MLC may provide this)
+        if last_chunk is not None:
+            # Check if chunk has usage attribute (like OpenAI API)
+            if hasattr(last_chunk, 'usage'):
+                usage = last_chunk.usage
+                if hasattr(usage, 'prompt_tokens'):
+                    prompt_tokens = usage.prompt_tokens
+                if hasattr(usage, 'completion_tokens'):
+                    completion_tokens = usage.completion_tokens
+                if hasattr(usage, 'total_tokens'):
+                    total_tokens = usage.total_tokens
+        
         # Calculate decode latency (time after first token)
         if first_token_time:
             decode_latency = decode_end - first_token_time
@@ -174,15 +267,25 @@ class Profiler:
             decode_latency = decode_end - prefill_start
             prefill_latency = decode_latency
         
-        # Estimate token count (rough approximation: ~0.75 tokens per word)
-        # This is a reasonable approximation for English text
-        num_tokens = int(len(response_text.split()) * 0.75)
+        # Count tokens using tokenizer if available (if not provided by API)
+        if completion_tokens == 0:
+            num_tokens = self.count_tokens(response_text)
+            completion_tokens = num_tokens
+        else:
+            num_tokens = completion_tokens
+        
+        # Calculate total if not provided
+        if total_tokens == 0:
+            total_tokens = prompt_tokens + completion_tokens
         
         # Get final metrics
         metrics = collector.get_metrics()
         metrics['prefill_latency'] = prefill_latency
         metrics['decode_latency'] = decode_latency
         metrics['tokens_per_sec'] = num_tokens / decode_latency if decode_latency > 0 else 0.0
+        metrics['prompt_tokens'] = prompt_tokens
+        metrics['completion_tokens'] = completion_tokens
+        metrics['total_tokens'] = total_tokens
         
         return response_text, metrics, num_tokens
     
@@ -205,8 +308,8 @@ class ExperimentRunner:
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.results: List[Metrics] = []
         
-    def generate_prompt(self, prefill_len: int) -> str:
-        """Generate a test prompt of approximately the target token length"""
+    def generate_prompt(self, prefill_len: int, tokenizer: Optional[Tokenizer] = None) -> str:
+        """Generate a test prompt of approximately the target token length using tokenizer if available"""
         template = self.config.get('test_prompt_template', 'Tell me about {topic}.')
         topics = self.config.get('test_topics', ['artificial intelligence'])
         topic = topics[0]  # Use first topic
@@ -216,13 +319,54 @@ class ExperimentRunner:
         max_prefill_tokens = 7000  # Conservative limit
         target_tokens = min(prefill_len, max_prefill_tokens)
 
+        # Base sentence to repeat
+        base_sentence = f"Explain {topic} in detail. "
+        
+        # If tokenizer is available, use it to build prompt accurately
+        if tokenizer is not None:
+            try:
+                prompt = ""
+                # Start with base sentence
+                prompt = base_sentence
+                current_tokens = len(tokenizer.encode(prompt).ids)
+                
+                # Keep adding sentences until we reach target (or close to it)
+                while current_tokens < target_tokens:
+                    # Add another sentence
+                    prompt += base_sentence
+                    encoded = tokenizer.encode(prompt)
+                    current_tokens = len(encoded.ids)
+                    
+                    # Safety check to avoid infinite loop
+                    if current_tokens >= target_tokens * 0.95:  # Stop at 95% to be safe
+                        break
+                
+                # Trim if we overshot (shouldn't happen often, but be safe)
+                if current_tokens > target_tokens:
+                    # Binary search to find the right length
+                    low, high = 0, len(prompt)
+                    best_prompt = prompt
+                    while low < high:
+                        mid = (low + high) // 2
+                        test_prompt = prompt[:mid]
+                        test_tokens = len(tokenizer.encode(test_prompt).ids)
+                        if test_tokens <= target_tokens:
+                            best_prompt = test_prompt
+                            low = mid + 1
+                        else:
+                            high = mid
+                    prompt = best_prompt
+                
+                return prompt
+            except Exception as e:
+                log_print(f"Warning: Tokenizer-based prompt generation failed: {e}, using estimation")
+        
+        # Fallback to word-based estimation
         # Estimate: ~0.75 tokens per word for English text (or ~1.33 words per token)
         # Use conservative estimate: 1.5 words per token to account for longer words
         words_needed = int(target_tokens * 1.5)
 
         # Create a repeating pattern to reach target length
-        # Use a sentence that's easy to tokenize predictably
-        base_sentence = f"Explain {topic} in detail. "
         words_per_sentence = len(base_sentence.split())
 
         # Calculate how many repetitions needed
@@ -260,8 +404,8 @@ class ExperimentRunner:
         try:
             profiler.initialize()
             
-            # Generate prompt
-            prompt = self.generate_prompt(prefill_len)
+            # Generate prompt using tokenizer if available
+            prompt = self.generate_prompt(prefill_len, tokenizer=profiler.tokenizer)
             
             # Warm-up runs
             log_print(f"Warm-up runs: {warmup_runs}")
@@ -294,6 +438,9 @@ class ExperimentRunner:
                         prefill_latency=metrics['prefill_latency'],
                         decode_latency=metrics['decode_latency'],
                         tokens_per_sec=metrics['tokens_per_sec'],
+                        prompt_tokens=int(metrics.get('prompt_tokens', 0)),
+                        completion_tokens=int(metrics.get('completion_tokens', 0)),
+                        total_tokens=int(metrics.get('total_tokens', 0)),
                         memory_mb=metrics['memory_mb'],
                         cpu_pct=metrics['cpu_pct'],
                         temp_c=metrics['temp_c'],
@@ -433,7 +580,9 @@ def test_model(model_path: str, device: str = 'cpu'):
         
         log_print(f"\nResponse: {response[:200]}...")
         log_print(f"\nMetrics:")
-        log_print(f"  Tokens: {num_tokens}")
+        log_print(f"  Prompt tokens: {metrics.get('prompt_tokens', 0)}")
+        log_print(f"  Completion tokens: {metrics.get('completion_tokens', num_tokens)}")
+        log_print(f"  Total tokens: {metrics.get('total_tokens', 0)}")
         log_print(f"  Prefill latency: {metrics['prefill_latency']:.3f}s")
         log_print(f"  Decode latency: {metrics['decode_latency']:.3f}s")
         log_print(f"  Throughput: {metrics['tokens_per_sec']:.2f} tokens/s")
