@@ -13,7 +13,7 @@ import argparse
 import subprocess
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, asdict, fields
 from datetime import datetime
 
 import psutil
@@ -21,6 +21,10 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from mlc_llm import MLCEngine
 from tokenizers import Tokenizer
+try:
+    from parse_profiling_log import parse_log as parse_log_entries
+except ImportError:
+    parse_log_entries = None
 
 
 def log_print(*args, **kwargs):
@@ -46,6 +50,7 @@ class Metrics:
     temp_c: float
     power_w: float
     timestamp: str
+    source: str = "live"
 
 
 class MetricCollector:
@@ -121,9 +126,6 @@ class Profiler:
         
     def _load_tokenizer(self) -> bool:
         """Load tokenizer from model path. Returns True if successful."""
-        if not TOKENIZER_AVAILABLE:
-            return False
-        
         try:
             # Try to find tokenizer.json in the model path
             # For HF:// paths, MLC downloads models to cache
@@ -306,8 +308,87 @@ class ExperimentRunner:
         self.config = config
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
+        self.results_file = Path(self.config.get("results_file", self.output_dir / "results.csv"))
+        self.results_file.parent.mkdir(parents=True, exist_ok=True)
+        self.csv_fieldnames = [f.name for f in fields(Metrics)]
         self.results: List[Metrics] = []
+        self.completed_counts: Dict[Tuple[str, str, str, int, int], int] = {}
+        self._load_existing_results()
         
+    def _experiment_key(
+        self,
+        model: str,
+        quantization: str,
+        activation_precision: str,
+        prefill_len: int,
+        decode_len: int,
+    ) -> Tuple[str, str, str, int, int]:
+        return (model, quantization, activation_precision, prefill_len, decode_len)
+
+    def _load_existing_results(self):
+        if not self.results_file.exists():
+            return
+        try:
+            df = pd.read_csv(self.results_file)
+        except Exception as exc:
+            log_print(f"Warning: Could not read existing results file {self.results_file}: {exc}")
+            return
+        for _, row in df.iterrows():
+            data = {field: row.get(field, None) for field in self.csv_fieldnames}
+            try:
+                metrics = Metrics(
+                    model=str(data["model"]),
+                    quantization=str(data["quantization"]),
+                    activation_precision=str(data["activation_precision"]),
+                    prefill_len=int(data["prefill_len"]),
+                    decode_len=int(data["decode_len"]),
+                    prefill_latency=float(data["prefill_latency"]),
+                    decode_latency=float(data["decode_latency"]),
+                    tokens_per_sec=float(data["tokens_per_sec"]),
+                    prompt_tokens=int(data.get("prompt_tokens", 0) or 0),
+                    completion_tokens=int(data.get("completion_tokens", 0) or 0),
+                    total_tokens=int(data.get("total_tokens", 0) or 0),
+                    memory_mb=float(data["memory_mb"]),
+                    cpu_pct=float(data["cpu_pct"]),
+                    temp_c=float(data["temp_c"]),
+                    power_w=float(data["power_w"]),
+                    timestamp=str(data["timestamp"]),
+                    source=str(data.get("source", "log")),
+                )
+            except Exception as exc:
+                log_print(f"Warning: Skipping malformed row in results file: {exc}")
+                continue
+            self.results.append(metrics)
+            key = self._experiment_key(
+                metrics.model,
+                metrics.quantization,
+                metrics.activation_precision,
+                metrics.prefill_len,
+                metrics.decode_len,
+            )
+            self.completed_counts[key] = self.completed_counts.get(key, 0) + 1
+        log_print(f"Loaded {len(self.results)} existing result entries from {self.results_file}")
+
+    def _record_result(self, metric_obj: Metrics):
+        self.results.append(metric_obj)
+        key = self._experiment_key(
+            metric_obj.model,
+            metric_obj.quantization,
+            metric_obj.activation_precision,
+            metric_obj.prefill_len,
+            metric_obj.decode_len,
+        )
+        self.completed_counts[key] = self.completed_counts.get(key, 0) + 1
+        self._append_to_csv(metric_obj)
+
+    def _append_to_csv(self, metric_obj: Metrics):
+        file_exists = self.results_file.exists()
+        with self.results_file.open("a", newline="") as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=self.csv_fieldnames)
+            if not file_exists:
+                writer.writeheader()
+            writer.writerow(asdict(metric_obj))
+
     def generate_prompt(self, prefill_len: int, tokenizer: Optional[Tokenizer] = None) -> str:
         """Generate a test prompt of approximately the target token length using tokenizer if available"""
         template = self.config.get('test_prompt_template', 'Tell me about {topic}.')
@@ -400,6 +481,14 @@ class ExperimentRunner:
         
         profiler = Profiler(model_path, device=self.config.get('device', 'cpu'))
         collector = MetricCollector(self.config.get('power_coefficient', 2.5))
+        key = self._experiment_key(model_name, quantization, activation_precision, prefill_len, decode_len)
+        existing_runs = self.completed_counts.get(key, 0)
+        runs_needed = max(0, measured_runs - existing_runs)
+        if runs_needed == 0:
+            log_print("All measured runs already completed for this configuration. Skipping.")
+            return []
+        if existing_runs > 0:
+            log_print(f"Resuming configuration with {existing_runs} completed runs. {runs_needed} runs remaining.")
         
         try:
             profiler.initialize()
@@ -408,22 +497,26 @@ class ExperimentRunner:
             prompt = self.generate_prompt(prefill_len, tokenizer=profiler.tokenizer)
             
             # Warm-up runs
-            log_print(f"Warm-up runs: {warmup_runs}")
-            for i in range(warmup_runs):
-                log_print(f"  Warm-up {i+1}/{warmup_runs}...", end='\r')
-                try:
-                    _, _, _ = profiler.generate_with_metrics(
-                        prompt, decode_len, collector
-                    )
-                except Exception as e:
-                    log_print(f"\n  Warning: Warm-up failed: {e}")
-                time.sleep(0.5)  # Brief pause between runs
+            if runs_needed > 0:
+                log_print(f"Warm-up runs: {warmup_runs}")
+                for i in range(warmup_runs):
+                    log_print(f"  Warm-up {i+1}/{warmup_runs}...", end='\r')
+                    try:
+                        _, _, _ = profiler.generate_with_metrics(
+                            prompt, decode_len, collector
+                        )
+                    except Exception as e:
+                        log_print(f"\n  Warning: Warm-up failed: {e}")
+                    time.sleep(0.5)  # Brief pause between runs
+            else:
+                log_print("Warm-up skipped (no runs remaining).")
             
             # Measured runs
             log_print(f"\nMeasured runs: {measured_runs}")
             run_metrics = []
-            for i in range(measured_runs):
-                log_print(f"  Run {i+1}/{measured_runs}...", end='\r')
+            for run_index in range(existing_runs, measured_runs):
+                display_idx = run_index + 1
+                log_print(f"  Run {display_idx}/{measured_runs}...", end='\r')
                 try:
                     response, metrics, num_tokens = profiler.generate_with_metrics(
                         prompt, decode_len, collector
@@ -445,14 +538,19 @@ class ExperimentRunner:
                         cpu_pct=metrics['cpu_pct'],
                         temp_c=metrics['temp_c'],
                         power_w=metrics['power_w'],
-                        timestamp=datetime.now().isoformat()
+                        timestamp=datetime.now().isoformat(),
+                        source='live'
                     )
                     run_metrics.append(metric_obj)
-                    log_print(f"  Run {i+1}/{measured_runs} - Latency: {metrics['prefill_latency']:.3f}s prefill, {metrics['decode_latency']:.3f}s decode")
+                    self._record_result(metric_obj)
+                    log_print(f"  Run {display_idx}/{measured_runs} - Latency: {metrics['prefill_latency']:.3f}s prefill, {metrics['decode_latency']:.3f}s decode")
                 except Exception as e:
-                    log_print(f"\n  Error in run {i+1}: {e}")
+                    log_print(f"\n  Error in run {display_idx}: {e}")
                 
                 time.sleep(0.5)  # Brief pause between runs
+            
+            if existing_runs > 0:
+                log_print("Completed remaining runs for resumed configuration.")
             
             return run_metrics
             
@@ -497,12 +595,14 @@ class ResultsGenerator:
     def __init__(self, output_dir: Path):
         self.output_dir = output_dir
         
-    def save_csv(self, results: List[Metrics], filename: str = "results.csv"):
+    def save_csv(self, results: List[Metrics], csv_path: Optional[Path] = None):
         """Save results to CSV file"""
-        csv_path = self.output_dir / filename
+        if csv_path is None:
+            csv_path = self.output_dir / "results.csv"
+        csv_path.parent.mkdir(parents=True, exist_ok=True)
         
         with open(csv_path, 'w', newline='') as f:
-            writer = csv.DictWriter(f, fieldnames=[f.name for f in Metrics.__dataclass_fields__.values()])
+            writer = csv.DictWriter(f, fieldnames=[f.name for f in fields(Metrics)])
             writer.writeheader()
             for result in results:
                 writer.writerow(asdict(result))
@@ -622,6 +722,16 @@ def main():
         default='cpu',
         help='Device to use (cpu, cuda, etc.)'
     )
+    parser.add_argument(
+        '--import-log',
+        type=str,
+        help='Parse an existing profiling log file, merge into results, and exit'
+    )
+    parser.add_argument(
+        '--results-file',
+        type=str,
+        help='Path to results CSV (overrides default output_dir/results.csv)'
+    )
     
     args = parser.parse_args()
 
@@ -647,6 +757,9 @@ def main():
     with open(config_path, 'r') as f:
         config = json.load(f)
     
+    if args.results_file:
+        config['results_file'] = args.results_file
+    
     # Override device if specified
     if args.device != 'cpu':
         config['device'] = args.device
@@ -663,13 +776,46 @@ def main():
     log_print(f"Decode lengths: {config.get('decode_lengths', [])}")
     log_print("="*60)
     
+    # Import log mode
+    if args.import_log:
+        if parse_log_entries is None:
+            log_print("Log import requested but parse_profiling_log module not available.")
+            sys.exit(1)
+        log_path = Path(args.import_log)
+        if not log_path.exists():
+            log_print(f"Log file not found: {log_path}")
+            sys.exit(1)
+        log_text = log_path.read_text()
+        records = parse_log_entries(log_text)
+        if not records:
+            log_print("No completed experiments found in log.")
+            sys.exit(0)
+        output_dir_path = Path(output_dir)
+        output_dir_path.mkdir(parents=True, exist_ok=True)
+        results_file = Path(config.get('results_file', output_dir_path / 'results.csv'))
+        results_file.parent.mkdir(parents=True, exist_ok=True)
+        new_df = pd.DataFrame(records)
+        if results_file.exists():
+            existing_df = pd.read_csv(results_file)
+            combined_df = pd.concat([existing_df, new_df], ignore_index=True)
+            combined_df.drop_duplicates(
+                subset=['model','quantization','activation_precision','prefill_len','decode_len','timestamp'],
+                keep='first',
+                inplace=True
+            )
+        else:
+            combined_df = new_df
+        combined_df.to_csv(results_file, index=False)
+        log_print(f"Imported {len(new_df)} entries from log into {results_file}")
+        sys.exit(0)
+    
     # Run experiments
     runner = ExperimentRunner(config, output_dir)
     results = runner.run_full_sweep()
     
     # Generate output
     generator = ResultsGenerator(Path(output_dir))
-    generator.save_csv(results)
+    generator.save_csv(results, csv_path=runner.results_file)
     generator.generate_plots(results)
     
     log_print(f"\n✅ Profiling complete! Results in: {output_dir}")
