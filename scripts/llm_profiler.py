@@ -22,6 +22,10 @@ import pandas as pd
 from mlc_llm import MLCEngine
 
 
+def log_print(*args, **kwargs):
+    """Print with immediate flush for logging compatibility"""
+    print(*args, **kwargs, flush=True)
+
 @dataclass
 class Metrics:
     """Container for profiling metrics"""
@@ -113,9 +117,9 @@ class Profiler:
     def initialize(self):
         """Initialize the MLC engine"""
         if self.engine is None:
-            print(f"Loading model: {self.model_path}")
+            log_print(f"Loading model: {self.model_path}")
             self.engine = MLCEngine(self.model_path, device=self.device)
-            print("Model loaded successfully")
+            log_print("Model loaded successfully")
     
     def generate_with_metrics(
         self,
@@ -202,18 +206,37 @@ class ExperimentRunner:
         self.results: List[Metrics] = []
         
     def generate_prompt(self, prefill_len: int) -> str:
-        """Generate a test prompt of approximately the target length"""
+        """Generate a test prompt of approximately the target token length"""
         template = self.config.get('test_prompt_template', 'Tell me about {topic}.')
         topics = self.config.get('test_topics', ['artificial intelligence'])
         topic = topics[0]  # Use first topic
         
-        # Create a prompt that will result in approximately prefill_len tokens
-        # Simple approach: repeat topic with context
-        base_prompt = f"Write a detailed explanation about {topic}. "
-        # Rough estimate: ~10 words per token, so multiply by 10
-        words_needed = max(50, prefill_len * 10)
-        prompt = base_prompt * (words_needed // len(base_prompt.split()) + 1)
-        return prompt[:words_needed * 6]  # Rough character limit
+        # Model has max context of 8192 tokens, so cap prefill_len to leave room
+        # Account for chat template overhead (~10-20 tokens) and decode tokens
+        max_prefill_tokens = 7000  # Conservative limit
+        target_tokens = min(prefill_len, max_prefill_tokens)
+
+        # Estimate: ~0.75 tokens per word for English text (or ~1.33 words per token)
+        # Use conservative estimate: 1.5 words per token to account for longer words
+        words_needed = int(target_tokens * 1.5)
+
+        # Create a repeating pattern to reach target length
+        # Use a sentence that's easy to tokenize predictably
+        base_sentence = f"Explain {topic} in detail. "
+        words_per_sentence = len(base_sentence.split())
+
+        # Calculate how many repetitions needed
+        num_repetitions = max(1, words_needed // words_per_sentence)
+
+        # Generate prompt by repeating the sentence
+        prompt = base_sentence * num_repetitions
+
+        # Trim to approximate target (slightly under to be safe)
+        # Estimate ~4 characters per word, so target chars = words * 4
+        target_chars = words_needed * 4
+        prompt = prompt[:target_chars]
+
+        return prompt
     
     def run_experiment(
         self,
@@ -227,9 +250,9 @@ class ExperimentRunner:
         measured_runs: int
     ) -> List[Metrics]:
         """Run a single experiment configuration"""
-        print(f"\n{'='*60}")
-        print(f"Experiment: {model_name} | {quantization} | {activation_precision} | Prefill:{prefill_len} | Decode:{decode_len}")
-        print(f"{'='*60}")
+        log_print(f"\n{'='*60}")
+        log_print(f"Experiment: {model_name} | {quantization} | {activation_precision} | Prefill:{prefill_len} | Decode:{decode_len}")
+        log_print(f"{'='*60}")
         
         profiler = Profiler(model_path, device=self.config.get('device', 'cpu'))
         collector = MetricCollector(self.config.get('power_coefficient', 2.5))
@@ -241,22 +264,22 @@ class ExperimentRunner:
             prompt = self.generate_prompt(prefill_len)
             
             # Warm-up runs
-            print(f"Warm-up runs: {warmup_runs}")
+            log_print(f"Warm-up runs: {warmup_runs}")
             for i in range(warmup_runs):
-                print(f"  Warm-up {i+1}/{warmup_runs}...", end='\r')
+                log_print(f"  Warm-up {i+1}/{warmup_runs}...", end='\r')
                 try:
                     _, _, _ = profiler.generate_with_metrics(
                         prompt, decode_len, collector
                     )
                 except Exception as e:
-                    print(f"\n  Warning: Warm-up failed: {e}")
+                    log_print(f"\n  Warning: Warm-up failed: {e}")
                 time.sleep(0.5)  # Brief pause between runs
             
             # Measured runs
-            print(f"\nMeasured runs: {measured_runs}")
+            log_print(f"\nMeasured runs: {measured_runs}")
             run_metrics = []
             for i in range(measured_runs):
-                print(f"  Run {i+1}/{measured_runs}...", end='\r')
+                log_print(f"  Run {i+1}/{measured_runs}...", end='\r')
                 try:
                     response, metrics, num_tokens = profiler.generate_with_metrics(
                         prompt, decode_len, collector
@@ -278,9 +301,9 @@ class ExperimentRunner:
                         timestamp=datetime.now().isoformat()
                     )
                     run_metrics.append(metric_obj)
-                    print(f"  Run {i+1}/{measured_runs} - Latency: {metrics['prefill_latency']:.3f}s prefill, {metrics['decode_latency']:.3f}s decode")
+                    log_print(f"  Run {i+1}/{measured_runs} - Latency: {metrics['prefill_latency']:.3f}s prefill, {metrics['decode_latency']:.3f}s decode")
                 except Exception as e:
-                    print(f"\n  Error in run {i+1}: {e}")
+                    log_print(f"\n  Error in run {i+1}: {e}")
                 
                 time.sleep(0.5)  # Brief pause between runs
             
@@ -309,7 +332,7 @@ class ExperimentRunner:
             for prefill_len in prefill_lengths:
                 for decode_len in decode_lengths:
                     current += 1
-                    print(f"\n[{current}/{total_experiments}] Running experiment...")
+                    log_print(f"\n[{current}/{total_experiments}] Running experiment...")
                     
                     metrics = self.run_experiment(
                         model_name, model_path, quantization, activation_precision,
@@ -337,13 +360,13 @@ class ResultsGenerator:
             for result in results:
                 writer.writerow(asdict(result))
         
-        print(f"\nResults saved to: {csv_path}")
+        log_print(f"\nResults saved to: {csv_path}")
         return csv_path
     
     def generate_plots(self, results: List[Metrics]):
         """Generate matplotlib visualizations"""
         if not results:
-            print("No results to plot")
+            log_print("No results to plot")
             return
         
         df = pd.DataFrame([asdict(r) for r in results])
@@ -390,38 +413,38 @@ class ResultsGenerator:
             plt.savefig(plot_path, dpi=150, bbox_inches='tight')
             plt.close()
             
-            print(f"Plot saved: {plot_path}")
+            log_print(f"Plot saved: {plot_path}")
 
 
 def test_model(model_path: str, device: str = 'cpu'):
     """Quick test to verify a model works"""
-    print(f"Testing model: {model_path}")
+    log_print(f"Testing model: {model_path}")
     profiler = Profiler(model_path, device=device)
     collector = MetricCollector()
     
     try:
         profiler.initialize()
         test_prompt = "Say hello in one sentence."
-        print(f"Prompt: {test_prompt}")
+        log_print(f"Prompt: {test_prompt}")
         
         response, metrics, num_tokens = profiler.generate_with_metrics(
             test_prompt, 50, collector
         )
         
-        print(f"\nResponse: {response[:200]}...")
-        print(f"\nMetrics:")
-        print(f"  Tokens: {num_tokens}")
-        print(f"  Prefill latency: {metrics['prefill_latency']:.3f}s")
-        print(f"  Decode latency: {metrics['decode_latency']:.3f}s")
-        print(f"  Throughput: {metrics['tokens_per_sec']:.2f} tokens/s")
-        print(f"  Memory: {metrics['memory_mb']:.1f} MB")
-        print(f"  CPU: {metrics['cpu_pct']:.1f}%")
-        print(f"  Temperature: {metrics['temp_c']:.1f}°C")
-        print(f"  Power: {metrics['power_w']:.2f}W")
-        print("\n✅ Model test successful!")
+        log_print(f"\nResponse: {response[:200]}...")
+        log_print(f"\nMetrics:")
+        log_print(f"  Tokens: {num_tokens}")
+        log_print(f"  Prefill latency: {metrics['prefill_latency']:.3f}s")
+        log_print(f"  Decode latency: {metrics['decode_latency']:.3f}s")
+        log_print(f"  Throughput: {metrics['tokens_per_sec']:.2f} tokens/s")
+        log_print(f"  Memory: {metrics['memory_mb']:.1f} MB")
+        log_print(f"  CPU: {metrics['cpu_pct']:.1f}%")
+        log_print(f"  Temperature: {metrics['temp_c']:.1f}°C")
+        log_print(f"  Power: {metrics['power_w']:.2f}W")
+        log_print("\n✅ Model test successful!")
         
     except Exception as e:
-        print(f"\n❌ Model test failed: {e}")
+        log_print(f"\n❌ Model test failed: {e}")
         import traceback
         traceback.print_exc()
         return False
@@ -452,6 +475,14 @@ def main():
     )
     
     args = parser.parse_args()
+
+    # Force unbuffered output for logging (important for nohup/background processes)
+    try:
+        sys.stdout.reconfigure(line_buffering=True)
+        sys.stderr.reconfigure(line_buffering=True)
+    except AttributeError:
+        # Python < 3.7 compatibility
+        pass
     
     # Test model mode
     if args.test_model:
@@ -461,7 +492,7 @@ def main():
     # Load configuration
     config_path = Path(args.config)
     if not config_path.exists():
-        print(f"Error: Config file not found: {config_path}")
+        log_print(f"Error: Config file not found: {config_path}")
         sys.exit(1)
     
     with open(config_path, 'r') as f:
@@ -473,15 +504,15 @@ def main():
     
     output_dir = config.get('output_dir', 'profiling_results')
     
-    print("="*60)
-    print("LLM Profiling System")
-    print("="*60)
-    print(f"Config: {config_path}")
-    print(f"Output: {output_dir}")
-    print(f"Models: {len(config.get('models', []))}")
-    print(f"Prefill lengths: {config.get('prefill_lengths', [])}")
-    print(f"Decode lengths: {config.get('decode_lengths', [])}")
-    print("="*60)
+    log_print("="*60)
+    log_print("LLM Profiling System")
+    log_print("="*60)
+    log_print(f"Config: {config_path}")
+    log_print(f"Output: {output_dir}")
+    log_print(f"Models: {len(config.get('models', []))}")
+    log_print(f"Prefill lengths: {config.get('prefill_lengths', [])}")
+    log_print(f"Decode lengths: {config.get('decode_lengths', [])}")
+    log_print("="*60)
     
     # Run experiments
     runner = ExperimentRunner(config, output_dir)
@@ -492,7 +523,7 @@ def main():
     generator.save_csv(results)
     generator.generate_plots(results)
     
-    print(f"\n✅ Profiling complete! Results in: {output_dir}")
+    log_print(f"\n✅ Profiling complete! Results in: {output_dir}")
 
 
 if __name__ == '__main__':
