@@ -1,0 +1,62 @@
+{
+  "models": [
+    {
+      "name": "SmolLM2-135M",
+      "hf_path": "HF://mlc-ai/SmolLM2-135M-Instruct-q0f32-MLC",
+      "quantization": "None (Full Precision)",
+      "activation_precision": "32-bit"
+    },
+    {
+      "name": "SmolLM2-135M",
+      "hf_path": "HF://mlc-ai/SmolLM2-135M-Instruct-q4f32_1-MLC",
+      "quantization": "INT4",
+      "activation_precision": "32-bit"
+    },
+    {
+      "name": "SmolLM2-135M",
+      "hf_path": "HF://mlc-ai/SmolLM2-135M-Instruct-q0f16-MLC",
+      "quantization": "None (Full Precision)",
+      "activation_precision": "16-bit"
+    },
+    {
+      "name": "SmolLM2-135M",
+      "hf_path": "HF://mlc-ai/SmolLM2-135M-Instruct-q4f16_1-MLC",
+      "quantization": "INT4",
+      "activation_precision": "16-bit"
+    },
+    {
+      "name": "Qwen2-0.5B-Instruct",
+      "hf_path": "HF://mlc-ai/Qwen2-0.5B-Instruct-q0f32-MLC",
+      "quantization": "None (Full Precision)",
+      "activation_precision": "32-bit"
+    },
+    {
+      "name": "Qwen2-0.5B-Instruct",
+      "hf_path": "HF://mlc-ai/Qwen2-0.5B-Instruct-q4f32_1-MLC",
+      "quantization": "INT4",
+      "activation_precision": "32-bit"
+    },
+    {
+      "name": "Qwen2-0.5B-Instruct",
+      "hf_path": "HF://mlc-ai/Qwen2-0.5B-Instruct-q0f16-MLC",
+      "quantization": "None (Full Precision)",
+      "activation_precision": "16-bit"
+    },
+    {
+      "name": "Qwen2-0.5B-Instruct",
+      "hf_path": "HF://mlc-ai/Qwen2-0.5B-Instruct-q4f16_1-MLC",
+      "quantization": "INT4",
+      "activation_precision": "16-bit"
+    }
+  ],
+  "prefill_prompts": {
+    "256": "Artificial intelligence has transformed countless industries by automating complex tasks and enabling new capabilities. From healthcare diagnostics to financial forecasting, AI systems are now integral to modern society. The field emerged from early research in the 1950s and has evolved through multiple waves of innovation, each building upon previous breakthroughs. Today's machine learning models, particularly deep neural networks, can process vast amounts of data and learn intricate patterns. As AI continues to advance, questions about ethics, bias, and alignment become increasingly important. Researchers and practitioners must ensure that AI systems are developed responsibly and deployed in ways that benefit humanity.",
+    "1024": "Artificial intelligence represents one of the most transformative technologies of our time, fundamentally reshaping how we work, learn, and interact with the world. From natural language processing that enables conversational systems to computer vision that interprets visual data, AI capabilities span an ever-widening array of domains. The journey of AI began with pioneering work in symbolic reasoning and expert systems, evolved through the machine learning revolution, and now centers on deep learning and foundation models. These large-scale neural networks, trained on diverse datasets, have demonstrated remarkable generalization capabilities. Contemporary challenges include understanding model behavior, reducing computational requirements, improving data efficiency, and addressing societal concerns about privacy and fairness. The future of AI depends on continued research into interpretability, robustness, and safe deployment strategies. Organizations worldwide are investing heavily in AI infrastructure, talent, and applications. As AI systems become more capable, governance frameworks and ethical guidelines become essential. The academic community, industry, and policymakers must collaborate to ensure AI development aligns with human values and societal needs.",
+    "2048": "Artificial intelligence has emerged as a defining technology of the twenty-first century, with implications extending far beyond computer science into every domain of human activity and knowledge. The theoretical foundations of AI rest on principles from mathematics, logic, and cognitive science, drawing insights from how humans perceive, learn, and reason. Early AI research in the 1950s and 1960s pursued symbolic approaches, attempting to encode human knowledge explicitly as rules and representations. This period gave rise to expert systems and knowledge graphs, which achieved impressive results in narrow domains but struggled with real-world complexity and scalability. The emergence of machine learning in the 1980s and 1990s shifted the paradigm, emphasizing learning from data rather than pre-programmed rules. Algorithms such as decision trees, support vector machines, and neural networks demonstrated that patterns could be discovered automatically from examples. The deep learning revolution of the 2010s, enabled by increases in computational power and data availability, catalyzed unprecedented advances in AI capabilities. Convolutional neural networks transformed computer vision, recurrent and transformer architectures enabled breakthrough results in natural language processing, and reinforcement learning demonstrated how agents could learn complex sequential decision-making tasks. Today's large language models, trained on billions of words from diverse sources, exhibit remarkable abilities in text understanding, generation, and reasoning. These models can engage in multi-step problem-solving, assist in code generation, and adapt to new tasks with minimal additional training. Yet significant challenges remain: models can exhibit biases present in training data, generate plausible-sounding but false information, require enormous computational resources for training and deployment, and their decision-making processes remain largely opaque. The AI safety and alignment community works to address these issues, developing techniques for interpretability, robustness against adversarial inputs, and alignment with human values. Policy frameworks are evolving globally to balance innovation with responsible development. The long-term implications of advanced AI systems raise profound questions about economic disruption, workforce transition, and the relationship between humans and machines. Addressing these challenges requires interdisciplinary collaboration spanning technology, social sciences, ethics, and governance."
+  },
+  "decode_lengths": [128, 512],
+  "governors": ["ondemand", "performance"],
+  "output_dir": "benchmark_results",
+  "warmup_runs": 1,
+  "measured_runs": 3
+}
