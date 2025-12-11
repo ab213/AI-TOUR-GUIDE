@@ -4,8 +4,9 @@ set -e
 # ============================================================================
 # CONFIGURATION
 # ============================================================================
-LOG_DIR="$HOME/AI-TOUR-GUIDE/benchmark_results/benchmark_logs"
-LOG_FILE="$LOG_DIR/benchmark_$(date +%Y%m%d_%H%M%S).log"
+WD="$HOME/AI-TOUR-GUIDE/benchmarking"
+LOG_DIR="$WD/logs"
+LOG_FILE="$LOG_DIR/$(date +%Y%m%d_%H%M%S).log"
 PY_SCRIPT="benchmark_orchestrator.py"
 RD_USB_LOG="$LOG_DIR/rd_usb.log"
 RD_USB_DIR="$HOME/rd-usb"
@@ -55,8 +56,8 @@ trap cleanup EXIT INT TERM
 # ============================================================================
 log "Starting benchmark orchestrator..."
 
-if [ ! -f "config.json" ]; then
-    log_error "config.json not found!"
+if [ ! -f "benchmark_config.json" ]; then
+    log_error "benchmark_config.json not found!"
     exit 1
 fi
 
@@ -77,7 +78,7 @@ log "✓ Preflight checks passed"
 # ============================================================================
 log "Starting rd-usb daemon..."
 cd "$RD_USB_DIR"
-python3 web.py --on-receive ./on_receive.py --on-receive-interval 0 > "$RD_USB_LOG" 2>&1 &
+python3 web.py --on-receive "$WD/record_pwr.py" --on-receive-interval 0 > "$RD_USB_LOG" 2>&1 &
 RD_PID=$!
 echo $RD_PID > "$RD_USB_PIDFILE"
 sleep 2
@@ -127,5 +128,5 @@ if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
 fi
 
 log_success "All benchmarks completed!"
-log "Results saved to profiling_results/results.csv"
+log "Results saved to $WD/benchmarking/results/results.csv"
 log "Full log: $LOG_FILE"

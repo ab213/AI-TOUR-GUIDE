@@ -56,7 +56,7 @@
   },
   "decode_lengths": [128, 512],
   "governors": ["ondemand", "performance"],
-  "output_dir": "benchmark_results",
+  "output_dir": "/home/pi/AI-TOUR-GUIDE/benchmarking/results",
   "warmup_runs": 1,
   "measured_runs": 3
 }

@@ -6,6 +6,8 @@ import psutil
 import threading
 import re
 import os
+import sys
+import shutil
 from mlc_llm import MLCEngine
 from transformers import AutoTokenizer
 
@@ -371,26 +373,55 @@ def load_completed_runs(output_path):
 # EXPERIMENT ORCHESTRATION
 # ============================================================================
 
-def run_all_experiments(cfg, resume=True):
+def _cleanup_model_cache(hf_path):
+    """Delete cached model to free space between model groups."""
+    cache_base = os.path.expanduser("~/morph_env/mlc-llm/model_weights/hf/mlc-ai")
+    model_name = hf_path.split("/")[-1].replace("-MLC", "")
+    model_cache = os.path.join(cache_base, model_name)
+    
+    if os.path.exists(model_cache):
+        try:
+            shutil.rmtree(model_cache)
+            print(f"  🗑️  Cleaned up cache for {model_name}")
+        except Exception as e:
+            print(f"  ⚠️  Could not clean up {model_name}: {e}")
+
+
+def run_all_experiments(cfg, resume=True, dry_run=False, cleanup_after_model=False):
     """
     Iterate experiment matrix with checkpointing. Skip completed runs if resume=True.
-    Append results to CSV as they complete. Logs errors but continues.
+    If dry_run=True, skip actual inference; just validate structure and log plan.
     """
     output_path = os.path.join(cfg["output_dir"], "results.csv")
     os.makedirs(cfg["output_dir"], exist_ok=True)
     init_results_csv(output_path)
     
+    if dry_run:
+        print("=" * 70)
+        print("DRY RUN MODE: Validating experiment matrix (no inference)")
+        print("=" * 70)
+        print()
+    
+    tokenizer_cache = init_tokenizer_cache(cfg) if not dry_run else {}
     completed = load_completed_runs(output_path) if resume else set()
     total_runs = (len(cfg["governors"]) * len(cfg["models"]) * 
                   len(cfg["prefill_prompts"]) * len(cfg["decode_lengths"]) *
                   cfg["measured_runs"])
     run_count = 0
 
-    tokenizer_cache = init_tokenizer_cache(cfg)
-
     for gov in cfg["governors"]:
+        last_model = None
         for model_cfg in cfg["models"]:
-            engine = MLCEngine(model=model_cfg["hf_path"])
+            # Clean up previous model if requested (frees space between models)
+            if cleanup_after_model and last_model and last_model != model_cfg["hf_path"]:
+                _cleanup_model_cache(last_model)
+
+            if dry_run:
+                print(f"[DRY] Model: {model_cfg['name']} ({model_cfg['quantization']})")
+                continue
+            
+            engine = MLCEngine(model=model_cfg["hf_path"], device="cpu")
+            last_model = model_cfg["hf_path"]
             tokenizer = tokenizer_cache[model_cfg["hf_path"]]
 
             for prefill_len_str in cfg["prefill_prompts"].keys():
@@ -399,9 +430,14 @@ def run_all_experiments(cfg, resume=True):
                 
                 for decode_len in cfg["decode_lengths"]:
                     for meas_run in range(cfg["measured_runs"]):
+                        if dry_run:
+                            print(f"  → {gov} | {prefill_len}→{decode_len} tokens | run {meas_run+1}/{cfg['measured_runs']}")
+                            run_count += 1
+                            continue
+                        
                         run_id = (model_cfg["name"], gov, prefill_len, decode_len)
                         if run_id in completed:
-                            if meas_run == 0:  # Only log once per config
+                            if meas_run == 0:
                                 print(f"⊘ [{run_count}/{total_runs}] Skipping completed: {model_cfg['name']} | {gov} | {prefill_len}→{decode_len}")
                             run_count += 1
                             continue
@@ -426,12 +462,29 @@ def run_all_experiments(cfg, resume=True):
                         except Exception as e:
                             print(f"✗ [{run_count}/{total_runs}] {model_cfg['name']} | {gov} | {prefill_len}→{decode_len} (run {meas_run+1}/{cfg['measured_runs']})")
                             print(f"  Error: {type(e).__name__}: {e}")
-                            # Continue to next run; let shell wrapper handle restarts
                             continue
 
-    print(f"\n✓ Experiment complete. Results saved to {output_path}")
-
+    if dry_run:
+        print()
+        print("=" * 70)
+        print(f"DRY RUN: {total_runs} experiments planned")
+        print(f"Governors: {cfg['governors']}")
+        print(f"Models: {len(cfg['models'])}")
+        print(f"Prefill lengths: {list(cfg['prefill_prompts'].keys())}")
+        print(f"Decode lengths: {cfg['decode_lengths']}")
+        print(f"Measured runs per config: {cfg['measured_runs']}")
+        print("=" * 70)
+    else:
+        print(f"\n✓ Experiment complete. Results saved to {output_path}")
 
 if __name__ == "__main__":
     cfg = load_config("benchmark_config.json")
-    run_all_experiments(cfg, resume=True)
+    dry_run = "--dry-run" in sys.argv
+    cleanup_after_model = "--cleanup-after-model" in sys.argv
+    
+    if "--precache" in sys.argv:
+        precache_models(cfg)
+        sys.exit(0)
+    
+    run_all_experiments(cfg, resume=True, dry_run=dry_run, cleanup_after_model=cleanup_after_model)
+
