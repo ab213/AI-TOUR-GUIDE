@@ -1,0 +1,90 @@
+================================================================================
+BENCHMARK ANALYSIS SUMMARY REPORT
+================================================================================
+
+1. DATASET OVERVIEW
+  Total runs: 361
+  Models tested: 2
+    - SmolLM2-135M, Qwen2-0.5B-Instruct
+  Quantizations: 2
+    - None (Full Precision), INT4
+  Governors: ondemand, performance
+  Context lengths: [np.int64(256), np.int64(1024), np.int64(2048)] prefill, [np.int64(128), np.int64(512)] decode
+
+2. PERFORMANCE SUMMARY (Averaged across all runs)
+  Latency:
+    - Prefill: 50.194s (σ=66.460)
+    - Decode:  105.397s (σ=115.193)
+  Throughput:
+    - Prefill: 154.4 tokens/sec
+    - Decode:  2.1 tokens/sec
+  Power:
+    - Prefill: 4.20W
+    - Decode:  5.53W
+  Energy:
+    - Per-token (decode): 3.4263 J/token
+  Efficiency:
+    - Decode: 7454.42 tokens/sec/W
+
+3. MODEL COMPARISON (Decoded phase)
+  Qwen2-0.5B-Instruct:
+    - Avg latency: 113.562s
+    - Avg throughput: 1.5 tokens/sec
+    - Avg power: 5.48W
+    - Energy/token: 3.8375 J/token
+    - Efficiency: 17939.68 tokens/sec/W
+  SmolLM2-135M:
+    - Avg latency: 99.593s
+    - Avg throughput: 2.5 tokens/sec
+    - Avg power: 5.57W
+    - Energy/token: 3.1339 J/token
+    - Efficiency: 0.44 tokens/sec/W
+
+4. QUANTIZATION IMPACT
+  Qwen2-0.5B-Instruct:
+    - Quantization speedup: -29.6%
+    - Power reduction: 5.3%
+  SmolLM2-135M:
+    - Quantization speedup: 19.2%
+    - Power reduction: 2.3%
+
+5. GOVERNOR IMPACT
+  ondemand:
+    - Avg throughput: 1.8 tokens/sec
+    - Avg power: 5.48W
+    - Avg frequency: 1623 MHz
+  performance:
+    - Avg throughput: 2.5 tokens/sec
+    - Avg power: 5.61W
+    - Avg frequency: 1638 MHz
+
+6. THERMAL ANALYSIS
+  Thermal throttling: 361/361 runs (100.0%)
+  Max temperature: 88.9°C
+  Avg temperature: 87.5°C
+  Thermal margin: -7.5°C (headroom)
+
+7. MEMORY ANALYSIS
+  Peak memory (prefill): 3.40GB
+  Peak memory (decode): 3.40GB
+  Memory efficiency: 253 tokens/GB
+
+8. DEPLOYMENT RECOMMENDATIONS
+  Best latency: Qwen2-0.5B-Instruct @ INT4
+    0.644s (1.6 tokens/sec)
+  Best efficiency: Qwen2-0.5B-Instruct @ INT4
+    1361890.92 tokens/sec/W
+  Best balanced: Qwen2-0.5B-Instruct @ INT4
+
+  Context length scaling:
+    256 tokens: 7.87s prefill latency
+    1024 tokens: 16.30s prefill latency
+    2048 tokens: 122.79s prefill latency
+
+9. KEY FINDINGS & INSIGHTS
+  - Quantization provides significant speedups with minimal thermal impact
+  - Thermal margin: TIGHT (consider cooling)
+  - Governors: performance mode recommended
+  - Scaling: Variable across context lengths
+
+================================================================================

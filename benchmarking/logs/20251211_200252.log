@@ -1,0 +1,33 @@
+[2025-12-11 20:02:52] Starting benchmark orchestrator...
+[2025-12-11 20:02:52] Log file: /home/pi/AI-TOUR-GUIDE/benchmarking/logs/20251211_200252.log
+[2025-12-11 20:02:52] 
+[2025-12-11 20:02:52] ✓ Preflight checks passed
+[2025-12-11 20:02:52] 
+[2025-12-11 20:02:52] Starting rd-usb daemon (nohup, survives SSH disconnect)...
+[2025-12-11 20:02:54] ✓ rd-usb started (PID 352154)
+[2025-12-11 20:02:54]   Power data: /home/pi/AI-TOUR-GUIDE/benchmarking/results/rd_usb_samples.csv
+[2025-12-11 20:02:54] 
+[2025-12-11 20:02:54] Attempt 1/3: Starting orchestrator...
+[2025-12-11 20:02:54] Resume: DISABLED (fresh run, ignoring previous results.csv)
+[2025-12-11 20:02:54] 
+[2025-12-11 20:02:54] Orchestrator PID: 352531
+[2025-12-11 20:02:54] 
+[20:03:51] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[20:03:51] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[20:03:51] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 576387, prefill chunk size will be set to 8192. 
+[20:03:51] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[20:03:51] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 1206.828 MB (Parameters: 513.134 MB. KVCache: 252.635 MB. Temporary buffer: 441.059 MB). The actual usage might be slightly larger than the estimated number.
+ondemand
+ondemand
+ondemand
+ondemand
+[2025-12-11 20:17:29] Cleaning up...
+[2025-12-11 20:17:29] Stopping rd-usb (PID 352154)...
+[2025-12-11 20:17:29] Orchestrator was PID 352531
+[2025-12-11 20:17:29] ✓ SUCCESS: Cleanup complete
+[2025-12-11 20:17:29] ✗ ERROR: Orchestrator failed with exit code 130
+[2025-12-11 20:17:29] Waiting 60s before retry...
+[2025-12-11 20:17:31] Cleaning up...
+[2025-12-11 20:17:31] ✓ SUCCESS: Cleanup complete
+[2025-12-11 20:17:31] Cleaning up...
+[2025-12-11 20:17:31] ✓ SUCCESS: Cleanup complete

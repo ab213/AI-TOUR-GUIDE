@@ -130,5 +130,9 @@
     "[-84.3881, 33.7492]": {
 	"name": "Georgia State Capitol",
 	"city": "Atlanta"
+    },
+    "[-84.2445, 33.9803]": {
+	"name": "Simpsonwood Park",
+	"city": "Peachtree Corners"
     }
 }

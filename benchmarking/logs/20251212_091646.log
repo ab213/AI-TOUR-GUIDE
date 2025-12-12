@@ -1,0 +1,182 @@
+[2025-12-12 09:16:46] Starting benchmark orchestrator...
+[2025-12-12 09:16:46] Log file: /home/pi/AI-TOUR-GUIDE/benchmarking/logs/20251212_091646.log
+[2025-12-12 09:16:46] 
+[2025-12-12 09:16:46] ✓ Preflight checks passed
+[2025-12-12 09:16:46] 
+[2025-12-12 09:16:46] Starting rd-usb daemon (nohup, survives SSH disconnect)...
+[2025-12-12 09:16:48] ✓ rd-usb started (PID 2488686)
+[2025-12-12 09:16:48]   Power data: /home/pi/AI-TOUR-GUIDE/benchmarking/results/rd_usb_samples.csv
+[2025-12-12 09:16:48] 
+[2025-12-12 09:16:48] Attempt 1/3: Starting orchestrator...
+[2025-12-12 09:16:48] Resume: ENABLED (will skip completed runs if results.csv exists)
+[2025-12-12 09:16:48] 
+[2025-12-12 09:16:48] Orchestrator PID: 2488727
+[2025-12-12 09:16:48] 
+[09:17:04] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[09:17:04] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[09:17:04] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 576387, prefill chunk size will be set to 8192. 
+[09:17:04] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[09:17:04] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 1206.828 MB (Parameters: 513.134 MB. KVCache: 252.635 MB. Temporary buffer: 441.059 MB). The actual usage might be slightly larger than the estimated number.
+[09:17:08] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[09:17:08] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[09:17:08] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 596085, prefill chunk size will be set to 8192. 
+[09:17:08] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[09:17:08] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 773.985 MB (Parameters: 80.290 MB. KVCache: 252.635 MB. Temporary buffer: 441.059 MB). The actual usage might be slightly larger than the estimated number.
+[09:17:09] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[09:17:09] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[09:17:09] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 597619, prefill chunk size will be set to 8192. 
+[09:17:09] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[09:17:09] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 740.261 MB (Parameters: 256.567 MB. KVCache: 252.635 MB. Temporary buffer: 231.059 MB). The actual usage might be slightly larger than the estimated number.
+[09:17:13] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[09:17:13] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 8192. 
+[09:17:13] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 128, max KV cache token capacity will be set to 606009, prefill chunk size will be set to 8192. 
+[09:17:13] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 8192.
+[09:17:13] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 555.902 MB (Parameters: 72.208 MB. KVCache: 252.635 MB. Temporary buffer: 231.059 MB). The actual usage might be slightly larger than the estimated number.
+[09:17:15] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 2048. 
+[09:17:15] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 32768, prefill chunk size will be set to 2048. 
+[09:17:15] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 80, max KV cache token capacity will be set to 765639, prefill chunk size will be set to 2048. 
+[09:17:15] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 2048.
+[09:17:15] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 4731.191 MB (Parameters: 1884.585 MB. KVCache: 152.245 MB. Temporary buffer: 2694.361 MB). The actual usage might be slightly larger than the estimated number.
+[ENTRY] benchmark_orchestrator.py starting...
+[CFG] Loading config from /home/pi/AI-TOUR-GUIDE/benchmarking/benchmark_config.json
+[CFG] Loaded config with keys: ['models', 'prefill_prompts', 'decode_lengths', 'governors', 'output_dir', 'warmup_runs', 'measured_runs']
+[CFG] Models: ['SmolLM2-135M', 'SmolLM2-135M', 'SmolLM2-135M', 'SmolLM2-135M', 'Qwen2-0.5B-Instruct', 'Qwen2-0.5B-Instruct', 'Qwen2-0.5B-Instruct', 'Qwen2-0.5B-Instruct']
+[CFG] Governors: ['ondemand', 'performance']
+[CFG] Prefill prompts: ['256', '1024', '2048']
+[CFG] Decode lengths: [128, 512]
+[CFG] Measured runs per config: 3
+[CFG] Output dir: /home/pi/AI-TOUR-GUIDE/benchmarking/results
+[ENTRY] CLI args: ['benchmark_orchestrator.py']
+[ENTRY] dry_run=False
+[ENTRY] Env flags: NO_RESUME=False, CLEANUP_AFTER_MODEL=False
+[ENTRY] Effective flags: resume=True, cleanup_after_model=False
+================================================================
+[MAIN] Starting run_all_experiments
+[MAIN]   resume=True, dry_run=False, cleanup_after_model=False
+================================================================
+[CSV] Results CSV already exists at /home/pi/AI-TOUR-GUIDE/benchmarking/results/results.csv; will append.
+[TOK] Initializing tokenizer cache...
+[TOK] - SmolLM2-135M (HF://mlc-ai/SmolLM2-135M-Instruct-q0f32-MLC) not in cache; loading...
+[TOK]   Loading tokenizer from HF repo: mlc-ai/SmolLM2-135M-Instruct-q0f32-MLC
+[TOK]   Loaded tokenizer vocab size: 49152
+[TOK] - SmolLM2-135M (HF://mlc-ai/SmolLM2-135M-Instruct-q4f32_1-MLC) not in cache; loading...
+[TOK]   Loading tokenizer from HF repo: mlc-ai/SmolLM2-135M-Instruct-q4f32_1-MLC
+[TOK]   Loaded tokenizer vocab size: 49152
+[TOK] - SmolLM2-135M (HF://mlc-ai/SmolLM2-135M-Instruct-q0f16-MLC) not in cache; loading...
+[TOK]   Loading tokenizer from HF repo: mlc-ai/SmolLM2-135M-Instruct-q0f16-MLC
+[TOK]   Loaded tokenizer vocab size: 49152
+[TOK] - SmolLM2-135M (HF://mlc-ai/SmolLM2-135M-Instruct-q4f16_1-MLC) not in cache; loading...
+[TOK]   Loading tokenizer from HF repo: mlc-ai/SmolLM2-135M-Instruct-q4f16_1-MLC
+[TOK]   Loaded tokenizer vocab size: 49152
+[TOK] - Qwen2-0.5B-Instruct (HF://mlc-ai/Qwen2-0.5B-Instruct-q0f32-MLC) not in cache; loading...
+[TOK]   Loading tokenizer from HF repo: mlc-ai/Qwen2-0.5B-Instruct-q0f32-MLC
+[TOK]   Loaded tokenizer vocab size: 151643
+[TOK] - Qwen2-0.5B-Instruct (HF://mlc-ai/Qwen2-0.5B-Instruct-q4f32_1-MLC) not in cache; loading...
+[TOK]   Loading tokenizer from HF repo: mlc-ai/Qwen2-0.5B-Instruct-q4f32_1-MLC
+[TOK]   Loaded tokenizer vocab size: 151643
+[TOK] - Qwen2-0.5B-Instruct (HF://mlc-ai/Qwen2-0.5B-Instruct-q0f16-MLC) not in cache; loading...
+[TOK]   Loading tokenizer from HF repo: mlc-ai/Qwen2-0.5B-Instruct-q0f16-MLC
+[TOK]   Loaded tokenizer vocab size: 151643
+[TOK] - Qwen2-0.5B-Instruct (HF://mlc-ai/Qwen2-0.5B-Instruct-q4f16_1-MLC) not in cache; loading...
+[TOK]   Loading tokenizer from HF repo: mlc-ai/Qwen2-0.5B-Instruct-q4f16_1-MLC
+[TOK]   Loaded tokenizer vocab size: 151643
+[TOK] Tokenizer cache ready.
+[CSV] Loading completed runs from /home/pi/AI-TOUR-GUIDE/benchmarking/results/results.csv...
+[CSV] Loaded 12 completed (model, gov, PT, GT) combos.
+[MAIN] Total (logical) runs in grid: 288
+[MAIN] Unique completed (model, gov, PT, GT): 12
+
+[LOOP] Governor: ondemand
+[LOOP]   Model group: SmolLM2-135M (HF://mlc-ai/SmolLM2-135M-Instruct-q0f32-MLC)
+[MODEL] Creating MLCEngine for HF://mlc-ai/SmolLM2-135M-Instruct-q0f32-MLC on CPU...
+[MODEL] Engine ready.
+[MODEL] Tokenizer retrieved from cache.
+[LOOP]     Prefill length: 256 (key='256')
+[LOOP]       Decode length: 128
+[LOOP]       >> Logical run 1/288 (meas_run=1/3)
+[SKIP] SmolLM2-135M | ondemand | 256→128 already completed (at least one run); skipping remaining repeats.
+[LOOP]       >> Logical run 2/288 (meas_run=2/3)
+[SKIP]   Repeated run 2 skipped for completed combo ('SmolLM2-135M', 'ondemand', 256, 128)
+[LOOP]       >> Logical run 3/288 (meas_run=3/3)
+[SKIP]   Repeated run 3 skipped for completed combo ('SmolLM2-135M', 'ondemand', 256, 128)
+[LOOP]       Decode length: 512
+[LOOP]       >> Logical run 4/288 (meas_run=1/3)
+[SKIP] SmolLM2-135M | ondemand | 256→512 already completed (at least one run); skipping remaining repeats.
+[LOOP]       >> Logical run 5/288 (meas_run=2/3)
+[SKIP]   Repeated run 2 skipped for completed combo ('SmolLM2-135M', 'ondemand', 256, 512)
+[LOOP]       >> Logical run 6/288 (meas_run=3/3)
+[SKIP]   Repeated run 3 skipped for completed combo ('SmolLM2-135M', 'ondemand', 256, 512)
+[LOOP]     Prefill length: 1024 (key='1024')
+[LOOP]       Decode length: 128
+[LOOP]       >> Logical run 7/288 (meas_run=1/3)
+[SKIP] SmolLM2-135M | ondemand | 1024→128 already completed (at least one run); skipping remaining repeats.
+[LOOP]       >> Logical run 8/288 (meas_run=2/3)
+[SKIP]   Repeated run 2 skipped for completed combo ('SmolLM2-135M', 'ondemand', 1024, 128)
+[LOOP]       >> Logical run 9/288 (meas_run=3/3)
+[SKIP]   Repeated run 3 skipped for completed combo ('SmolLM2-135M', 'ondemand', 1024, 128)
+[LOOP]       Decode length: 512
+[LOOP]       >> Logical run 10/288 (meas_run=1/3)
+[SKIP] SmolLM2-135M | ondemand | 1024→512 already completed (at least one run); skipping remaining repeats.
+[LOOP]       >> Logical run 11/288 (meas_run=2/3)
+[SKIP]   Repeated run 2 skipped for completed combo ('SmolLM2-135M', 'ondemand', 1024, 512)
+[LOOP]       >> Logical run 12/288 (meas_run=3/3)
+[SKIP]   Repeated run 3 skipped for completed combo ('SmolLM2-135M', 'ondemand', 1024, 512)
+[LOOP]     Prefill length: 2048 (key='2048')
+[LOOP]       Decode length: 128
+[LOOP]       >> Logical run 13/288 (meas_run=1/3)
+[SKIP] SmolLM2-135M | ondemand | 2048→128 already completed (at least one run); skipping remaining repeats.
+[LOOP]       >> Logical run 14/288 (meas_run=2/3)
+[SKIP]   Repeated run 2 skipped for completed combo ('SmolLM2-135M', 'ondemand', 2048, 128)
+[LOOP]       >> Logical run 15/288 (meas_run=3/3)
+[SKIP]   Repeated run 3 skipped for completed combo ('SmolLM2-135M', 'ondemand', 2048, 128)
+[LOOP]       Decode length: 512
+[LOOP]       >> Logical run 16/288 (meas_run=1/3)
+[SKIP] SmolLM2-135M | ondemand | 2048→512 already completed (at least one run); skipping remaining repeats.
+[LOOP]       >> Logical run 17/288 (meas_run=2/3)
+[SKIP]   Repeated run 2 skipped for completed combo ('SmolLM2-135M', 'ondemand', 2048, 512)
+[LOOP]       >> Logical run 18/288 (meas_run=3/3)
+[SKIP]   Repeated run 3 skipped for completed combo ('SmolLM2-135M', 'ondemand', 2048, 512)
+[LOOP]   Model group: SmolLM2-135M (HF://mlc-ai/SmolLM2-135M-Instruct-q4f32_1-MLC)
+[MODEL] Creating MLCEngine for HF://mlc-ai/SmolLM2-135M-Instruct-q4f32_1-MLC on CPU...
+[MODEL] Engine ready.
+[MODEL] Tokenizer retrieved from cache.
+[LOOP]     Prefill length: 256 (key='256')
+[LOOP]       Decode length: 128
+[LOOP]       >> Logical run 19/288 (meas_run=1/3)
+[SKIP] SmolLM2-135M | ondemand | 256→128 already completed (at least one run); skipping remaining repeats.
+[LOOP]       >> Logical run 20/288 (meas_run=2/3)
+[SKIP]   Repeated run 2 skipped for completed combo ('SmolLM2-135M', 'ondemand', 256, 128)
+[LOOP]       >> Logical run 21/288 (meas_run=3/3)
+[SKIP]   Repeated run 3 skipped for completed combo ('SmolLM2-135M', 'ondemand', 256, 128)
+[LOOP]       Decode length: 512
+[LOOP]       >> Logical run 22/288 (meas_run=1/3)
+[SKIP] SmolLM2-135M | ondemand | 256→512 already completed (at least one run); skipping remaining repeats.
+[LOOP]       >> Logical run 23/288 (meas_run=2/3)
+[SKIP]   Repeated run 2 skipped for completed combo ('SmolLM2-135M', 'ondemand', 256, 512)
+[LOOP]       >> Logical run 24/288 (meas_run=3/3)
+[SKIP]   Repeated run 3 skipped for completed combo ('SmolLM2-135M', 'ondemand', 256, 512)
+[LOOP]     Prefill length: 1024 (key='1024')
+[LOOP]       Decode length: 128
+[LOOP]       >> Logical run 25/288 (meas_run=1/3)
+[SKIP] SmolLM2-135M | ondemand | 1024→128 already completed (at least one run); skipping remaining repeats.
+[LOOP]       >> Logical run 26/288 (meas_run=2/3)
+[SKIP]   Repeated run 2 skipped for completed combo ('SmolLM2-135M', 'ondemand', 1024, 128)
+[LOOP]       >> Logical run 27/288 (meas_run=3/3)
+[SKIP]   Repeated run 3 skipped for completed combo ('SmolLM2-135M', 'ondemand', 1024, 128)[09:17:34] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 2048. 
+[09:17:34] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 32768, prefill chunk size will be set to 2048. 
+[09:17:34] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 80, max KV cache token capacity will be set to 901295, prefill chunk size will be set to 2048. 
+[09:17:34] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 2048.
+[09:17:34] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 3141.302 MB (Parameters: 294.697 MB. KVCache: 152.245 MB. Temporary buffer: 2694.361 MB). The actual usage might be slightly larger than the estimated number.
+[09:17:39] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "local", max batch size will be set to 4, max KV cache token capacity will be set to 8192, prefill chunk size will be set to 2048. 
+[09:17:39] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "interactive", max batch size will be set to 1, max KV cache token capacity will be set to 32768, prefill chunk size will be set to 2048. 
+[09:17:39] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:798: Under mode "server", max batch size will be set to 80, max KV cache token capacity will be set to 859009, prefill chunk size will be set to 2048. 
+[09:17:39] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:879: The actual engine mode is "local". So max batch size is 4, max KV cache token capacity is 8192, prefill chunk size is 2048.
+[09:17:39] /home/pi/test_env/mlc-llm/cpp/serve/config.cc:884: Estimated total single GPU memory usage: 3636.898 MB (Parameters: 942.293 MB. KVCache: 152.245 MB. Temporary buffer: 2542.361 MB). The actual usage might be slightly larger than the estimated number.
+[2025-12-12 09:17:50] ✗ ERROR: Orchestrator failed with exit code 137
+[2025-12-12 09:17:50] Waiting 60s before retry...
+[2025-12-12 09:17:56] Cleaning up...
+[2025-12-12 09:17:56] Stopping rd-usb (PID 2488686)...
+[2025-12-12 09:17:56] Orchestrator was PID 2488727
+[2025-12-12 09:17:56] ✓ SUCCESS: Cleanup complete
+[2025-12-12 09:17:56] Cleaning up...
+[2025-12-12 09:17:56] ✓ SUCCESS: Cleanup complete

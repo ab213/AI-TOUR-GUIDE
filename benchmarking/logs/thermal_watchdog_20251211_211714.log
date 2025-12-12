@@ -1,0 +1,4 @@
+[2025-12-11 21:17:14] Thermal watchdog started.
+[2025-12-11 21:17:14] Max temp: 90°C, resume temp: 55°C, interval: 60s
+[2025-12-11 21:17:14] Benchmark already running; not starting a second instance.
+[2025-12-11 21:17:14] Current CPU temp: 84.5°C

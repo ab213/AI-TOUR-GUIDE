@@ -1,0 +1,14 @@
+[2025-12-11 20:23:38] Starting benchmark orchestrator...
+[2025-12-11 20:23:38] Log file: /home/pi/AI-TOUR-GUIDE/benchmarking/logs/20251211_202338.log
+[2025-12-11 20:23:38] 
+[2025-12-11 20:23:38] ✓ Preflight checks passed
+[2025-12-11 20:23:38] 
+[2025-12-11 20:23:38] Starting rd-usb daemon (nohup, survives SSH disconnect)...
+[2025-12-11 20:23:40] ✗ ERROR: Failed to start rd-usb
+Traceback (most recent call last):
+  File "/home/pi/rd-usb/web.py", line 14, in <module>
+    from flask import Flask
+ModuleNotFoundError: No module named 'flask'
+[2025-12-11 20:23:40] Cleaning up...
+[2025-12-11 20:23:40] Stopping rd-usb (PID 610846)...
+[2025-12-11 20:23:40] ✓ SUCCESS: Cleanup complete
