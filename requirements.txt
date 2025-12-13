@@ -1,6 +1,24 @@
-pyserial
-pynmea2
+# Core Application Dependencies
+pyserial>=3.5
+pynmea2>=1.19.0
 pynmeagps==1.0.51
-numba
-pyttsx3
-tokenizers
+numba>=0.58.0
+pyttsx3>=2.90
+tokenizers>=0.15.0
+
+# LLM Inference
+# Note: mlc-llm is installed separately in Dockerfile from official mlc.ai wheels
+# For local development: pip install --pre -U -f https://mlc.ai/wheels mlc-llm-nightly-cpu mlc-ai-nightly-cpu
+# mlc-llm>=0.2.0  # Uncomment for local non-Docker installation
+transformers>=4.35.0
+
+# GPS Daemon Support
+gps>=3.20
+
+# Optional: Benchmarking Tools
+# Uncomment if you need to run benchmarking scripts
+# pandas>=2.0.0
+# numpy>=1.24.0
+# matplotlib>=3.7.0
+# seaborn>=0.12.0
+# psutil>=5.9.0

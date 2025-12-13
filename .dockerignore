@@ -1,34 +1,70 @@
-# Include any files or directories that you don't want to be copied to your
-# container here (e.g., local build artifacts, temporary files, etc.).
-#
-# For more help, visit the .dockerignore file reference guide at
-# https://docs.docker.com/go/build-context-dockerignore/
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
 
-**/.DS_Store
-**/__pycache__
-**/.venv
-**/.classpath
-**/.dockerignore
-**/.env
-**/.git
-**/.gitignore
-**/.project
-**/.settings
-**/.toolstarget
-**/.vs
-**/.vscode
-**/*.*proj.user
-**/*.dbmdl
-**/*.jfm
-**/bin
-**/charts
-**/docker-compose*
-**/compose.y*ml
-**/Dockerfile*
-**/node_modules
-**/npm-debug.log
-**/obj
-**/secrets.dev.yaml
-**/values.dev.yaml
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Documentation (not needed in container)
+*.md
+!llm/model/README.md
+
+# Logs and temporary files
+*.log
+logs/
+*.tmp
+*.temp
+
+# Benchmarking results and analysis (not needed for runtime)
+benchmarking/results/
+benchmarking/analysis/
+benchmarking/logs/
+benchmarking/*.csv
+benchmarking/*.png
+benchmarking/*.json
+!benchmarking/benchmark_config.json
+
+# Docker files (don't need to copy into container)
+Dockerfile
+.dockerignore
+compose.yaml
+docker-compose*.yml
+
+# Scripts (optional - include if needed)
+scripts/
+
+# Test files
+test_*.py
+*_test.py
+tests/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Environment files
+.env
+.env.local
+
+# License (optional)
 LICENSE
-README.md
