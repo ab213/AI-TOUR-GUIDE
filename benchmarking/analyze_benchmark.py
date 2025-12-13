@@ -199,17 +199,43 @@ class BenchmarkAnalyzer:
         axes[1, 0].legend()
         axes[1, 0].grid(alpha=0.3)
         
-        # Efficiency: tokens/sec/W
-        grouped = self.df.groupby(['model_name', 'quantization']).agg({
-            'decode_efficiency': 'mean',
-        }).reset_index()
-        
+        # Energy efficiency: tokens/sec/W (prefill & decode, robust to outliers)
+        grouped = (
+            self.df
+            .groupby(['model_name', 'quantization'])
+            .agg({
+                'prefill_efficiency': 'median',
+                'decode_efficiency': 'median',
+            })
+            .reset_index()
+        )
+
         x = np.arange(len(grouped))
-        axes[1, 1].bar(x, grouped['decode_efficiency'], alpha=0.8, color='green')
+        width = 0.35
+
+        axes[1, 1].bar(
+            x - width / 2,
+            grouped['prefill_efficiency'],
+            width,
+            label='Prefill',
+            alpha=0.8,
+        )
+        axes[1, 1].bar(
+            x + width / 2,
+            grouped['decode_efficiency'],
+            width,
+            label='Decode',
+            alpha=0.8,
+        )
+
         axes[1, 1].set_ylabel('Tokens/sec/W')
         axes[1, 1].set_title('Energy Efficiency (Higher is Better)')
         axes[1, 1].set_xticks(x)
-        axes[1, 1].set_xticklabels([f"{m[:12]}\n{q[:10]}" for m, q in zip(grouped['model_name'], grouped['quantization'])], fontsize=8)
+        axes[1, 1].set_xticklabels(
+            [f"{m[:12]}\n{q[:10]}" for m, q in zip(grouped['model_name'], grouped['quantization'])],
+            fontsize=8,
+        )
+        axes[1, 1].legend()
         axes[1, 1].grid(axis='y', alpha=0.3)
         
         plt.tight_layout()
@@ -699,18 +725,18 @@ def main():
     analyzer = BenchmarkAnalyzer(csv_path)
     
     print("\nGenerating visualizations...")
-    analyzer.plot_latency_breakdown()
-    analyzer.plot_throughput_analysis()
+    #analyzer.plot_latency_breakdown()
+    #analyzer.plot_throughput_analysis()
     analyzer.plot_energy_metrics()
-    analyzer.plot_memory_analysis()
-    analyzer.plot_thermal_analysis()
-    analyzer.plot_utilization_analysis()
-    analyzer.plot_quantization_impact()
-    analyzer.plot_context_length_scaling()
-    analyzer.plot_pareto_frontiers()
+    #analyzer.plot_memory_analysis()
+    #analyzer.plot_thermal_analysis()
+    #analyzer.plot_utilization_analysis()
+    #analyzer.plot_quantization_impact()
+    #analyzer.plot_context_length_scaling()
+    #analyzer.plot_pareto_frontiers()
     
-    print("\nGenerating summary report...")
-    analyzer.generate_summary_report()
+    #print("\nGenerating summary report...")
+    #analyzer.generate_summary_report()
     
     print(f"\n✓ All analyses complete!")
     print(f"  Output directory: {analyzer.output_dir}")
